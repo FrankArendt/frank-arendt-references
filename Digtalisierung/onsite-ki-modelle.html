@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onsite-KI-Modelle 2026 – Aufstellung für Amateure & KMU</title>
+<style>
+  :root{
+    --bg:#0f1419;--panel:#1a2129;--panel2:#212b35;--ink:#e8edf2;--muted:#9aa9b8;--line:#2e3a47;
+    --nano:#7d7de0;--klein:#4ea1d3;--mittel:#e0a458;--gross:#d1607a;--accent:#5ad19a;--gold:#ffd479;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  .wrap{max-width:1300px;margin:0 auto;padding:32px 20px 80px}
+  header h1{font-size:2rem;margin:0 0 6px;letter-spacing:-.02em}
+  header .sub{color:var(--muted);font-size:.95rem;margin-bottom:24px}
+
+  .toc{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 22px;margin-bottom:30px}
+  .toc h3{margin:0 0 10px;font-size:.95rem;color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
+  .toc ol{margin:0;padding-left:20px;columns:2;column-gap:32px}
+  @media(max-width:640px){.toc ol{columns:1}}
+  .toc li{margin:4px 0;font-size:.87rem}
+  .toc a{color:#cdd8e2;text-decoration:none}
+  .toc a:hover{color:var(--klein);text-decoration:underline}
+
+  section{margin-bottom:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:26px}
+  .card h2{margin-top:0;font-size:1.3rem}
+  .card p{color:#cdd8e2;margin:.6em 0}
+
+  .risk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:18px}
+  .risk{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .risk b{color:var(--accent);display:block;margin-bottom:4px;font-size:.95rem}
+  .risk span{font-size:.85rem;color:var(--muted)}
+
+  .os-note p{margin:.4em 0;font-size:.87rem;color:#cdd8e2}
+  .os-note b{color:var(--ink)}
+
+  .buildnote{background:rgba(90,209,154,.07);border:1px solid rgba(90,209,154,.28);border-radius:12px;padding:16px 22px;margin-bottom:30px;font-size:.86rem;color:#c7e6d5}
+  .buildnote b{color:var(--accent)}
+
+  h2.cluster{font-size:1.4rem;margin:40px 0 4px;padding-left:12px;border-left:5px solid;scroll-margin-top:20px}
+  .cluster.nano{border-color:var(--nano)} .cluster.klein{border-color:var(--klein)}
+  .cluster.mittel{border-color:var(--mittel)} .cluster.gross{border-color:var(--gross)}
+  .cluster-desc{color:var(--muted);font-size:.9rem;margin:0 0 16px 17px}
+  .tag{display:inline-block;font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:20px;vertical-align:middle;margin-left:8px}
+  .tag.nano{background:rgba(125,125,224,.18);color:var(--nano)} .tag.klein{background:rgba(78,161,211,.18);color:var(--klein)}
+  .tag.mittel{background:rgba(224,164,88,.18);color:var(--mittel)} .tag.gross{background:rgba(209,96,122,.18);color:var(--gross)}
+
+  .tbl-scroll{overflow-x:auto;border-radius:12px;border:1px solid var(--line)}
+  table{border-collapse:collapse;width:100%;font-size:.81rem}
+  .models-tbl{min-width:1180px}
+  thead th{background:var(--panel2);color:var(--ink);text-align:left;padding:11px 12px;font-weight:600;border-bottom:2px solid var(--line);white-space:nowrap}
+  tbody td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  tbody tr:nth-child(odd){background:var(--panel)} tbody tr:nth-child(even){background:var(--panel2)}
+  .model-name{font-weight:600;white-space:nowrap}
+  .price{color:var(--accent);font-weight:600;white-space:nowrap}
+  .total{color:var(--gold);font-weight:700;white-space:nowrap}
+  .ref{color:var(--muted);font-size:.74rem}
+  .os{font-size:.74rem;color:var(--nano);white-space:nowrap}
+  .power{font-size:.77rem;color:#c9b78f;white-space:nowrap}
+
+  .usecases{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0 8px}
+  @media(max-width:640px){.usecases{grid-template-columns:1fr}}
+  .uc-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 18px}
+  .uc-card h4{margin:0 0 8px;font-size:.95rem}
+  .uc-card.priv h4{color:var(--klein)} .uc-card.kmu h4{color:var(--accent)}
+  .uc-card ul{margin:0;padding-left:18px}
+  .uc-card li{margin:4px 0;font-size:.85rem;color:#cdd8e2}
+
+  .note{border-radius:10px;padding:14px 18px;margin:14px 0 8px;font-size:.85rem}
+  .note.red{background:rgba(209,96,122,.08);border:1px solid rgba(209,96,122,.32);color:#ecc9d3}
+  .note.red b{color:var(--gross)}
+  .note.amber{background:rgba(224,164,88,.08);border:1px solid rgba(224,164,88,.32);color:#e6d3b6}
+  .note.amber b{color:var(--mittel)}
+  .note.green{background:rgba(90,209,154,.07);border:1px solid rgba(90,209,154,.28);color:#c7e6d5}
+  .note.green b,.note.green strong{color:var(--accent)}
+
+  h3.sub-h{color:var(--klein);font-size:1.05rem;margin-top:26px}
+  .plainlist{font-size:.86rem;color:#cdd8e2;line-height:1.7}
+
+  footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.8rem}
+  code{background:#0b0f14;padding:1px 6px;border-radius:4px;font-size:.8rem;color:#9fe0c4}
+  .back{font-size:.75rem;color:var(--muted);text-decoration:none;float:right;margin-top:6px}
+  .back:hover{color:var(--klein)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Onsite-KI-Modelle 2026 – Aufstellung für Amateure &amp; KMU</h1>
+  <div class="sub">Stand: Juli 2026 · lokal betriebene Open-Weight-Modelle · Neuware-Preise · Gesamt-Systemkosten (inkl. gespiegelter High-End-SSD &amp; USV) · Windows · Linux/Unix · macOS · Raspberry Pi</div>
+</header>
+
+<nav class="toc" id="top">
+  <h3>Inhalt</h3>
+  <ol>
+    <li><a href="#risiken">Warum onsite? Risiken großer Cloud-KI</a></li>
+    <li><a href="#os">Betriebssysteme im Überblick</a></li>
+    <li><a href="#kosten">Zur Kostenkalkulation (SSD-Spiegel &amp; USV)</a></li>
+    <li><a href="#c0">Cluster 0 – Raspberry Pi 5</a></li>
+    <li><a href="#c1">Cluster 1 – Kleine Modelle</a></li>
+    <li><a href="#c2">Cluster 2 – Mittlere Modelle</a></li>
+    <li><a href="#c3">Cluster 3 – Große Modelle</a></li>
+    <li><a href="#entscheidung">Entscheidungshilfe nach Budget</a></li>
+    <li><a href="#praxis">Praxisbetrieb: Architektur, Admin, VPN, Mobile, Markdown</a></li>
+    <li><a href="#cpu">CPU-Empfehlungen &amp; Fertigrechner (Dell / ThinkStation)</a></li>
+  </ol>
+</nav>
+
+<!-- ===== RISIKEN ===== -->
+<section class="card" id="risiken">
+  <h2>Warum onsite? Welche Risiken großer Cloud-KI werden entschärft</h2>
+  <p>„Onsite“ bzw. „lokal“ bedeutet, dass ein KI-Modell vollständig auf eigener Hardware im Haus läuft – ohne dass Eingaben an einen externen Cloud-Anbieter gesendet werden. Für Privatinteressierte wie für kleine und mittlere Unternehmen (KMU) entschärft das mehrere Risiken gehosteter KI-Dienste (ChatGPT, Claude, Gemini &amp; Co.):</p>
+  <div class="risk-grid">
+    <div class="risk"><b>Datenabfluss &amp; Vertraulichkeit</b><span>Keine Prompts, Kundendaten, Verträge oder Quellcodes verlassen das eigene Netz. Kein Mitlesen, kein Training auf euren Daten durch Dritte.</span></div>
+    <div class="risk"><b>DSGVO &amp; Datenresidenz</b><span>Verarbeitung bleibt nachweislich im eigenen Haus/EU. Keine Drittlandübermittlung, kein AV-Vertrag mit US-Anbietern nötig.</span></div>
+    <div class="risk"><b>Kosten-Planbarkeit</b><span>Einmalige Hardware statt laufender Token-/Abogebühren. Bei hohem Volumen amortisiert sich die Anschaffung; keine API-Preiserhöhungen.</span></div>
+    <div class="risk"><b>Verfügbarkeit &amp; Unabhängigkeit</b><span>Funktioniert offline und bei Anbieter-Ausfällen. Kein Vendor-Lock-in, kein plötzliches Abschalten von Modellen.</span></div>
+    <div class="risk"><b>Zensur- &amp; Nutzungsgrenzen</b><span>Keine willkürlichen Inhaltsfilter oder Rate-Limits von außen; volle Kontrolle über Modellverhalten und Feintuning.</span></div>
+    <div class="risk"><b>Auditierbarkeit</b><span>Nachvollziehbar, welches Modell in welcher Version lief – wichtig für Compliance und Reproduzierbarkeit.</span></div>
+  </div>
+  <p style="margin-top:16px;font-size:.84rem;color:var(--muted)">Einordnung: Lokale Open-Weight-Modelle erreichen 2026 in vielen Alltags- und Fachaufgaben Cloud-Niveau, liegen an der absoluten Spitze (höchstes Reasoning, sehr lange Kontexte) aber teils zurück. Onsite mitigiert Risiken – es ersetzt nicht in jedem Fall die reine Leistungsspitze der Frontier-Modelle.</p>
+</section>
+
+<!-- ===== OS ===== -->
+<section class="card os-note" id="os">
+  <h2>Betriebssysteme – gilt für alle Cluster</h2>
+  <p><b>Windows 11:</b> Läuft mit NVIDIA-GPUs (CUDA) am reibungslosesten; <code>Ollama</code>/<code>LM Studio</code> nativ. Copilot+-PCs mit NPU nutzen „Phi Silica“ im OS. Einschränkung: AMD/Intel-GPU-Beschleunigung fummeliger als unter Linux.</p>
+  <p><b>Linux/Unix:</b> Referenzplattform – beste Treiber-/Framework-Unterstützung (CUDA, ROCm, vLLM), höchste Effizienz für Dauerbetrieb/Server. Für KMU-Server empfohlen. Einschränkung: mehr Einrichtungs-Know-how.</p>
+  <p><b>macOS (Apple Silicon):</b> Unified Memory ersetzt separate GPU; sehr leise &amp; stromsparend (MLX/Ollama). Stark bei großen Modellen. Einschränkung: kein CUDA, reine Inferenz.</p>
+  <p><b>Raspberry Pi (ARM/Linux):</b> Nur für sehr kleine Modelle – Cluster 0. CPU-only, stark limitiert.</p>
+  <a class="back" href="#top">↑ nach oben</a>
+</section>
+
+<!-- ===== KOSTEN-HINWEIS ===== -->
+<div class="buildnote" id="kosten">
+  <b>Zur Spalte „Gesamtkosten System (Neuware)“:</b> Alle Grafikkarten &amp; Komponenten als <b>Neuware</b> kalkuliert (keine Gebrauchtware). Enthalten sind neben der GPU auch Mainboard, CPU, RAM, Gehäuse, Kühlung sowie zwei ausdrücklich gewünschte Positionen: <b>(1) gespiegeltes SSD-Failover</b> = 2× hochwertige NVMe-SSD 2 TB (Samsung 990&nbsp;PRO, ~299&nbsp;€/Stück; RAID-1) bzw. Enterprise-SSD mit Power-Loss-Protection im großen Cluster, und <b>(2) eine USV</b> (unterbrechungsfreie Stromversorgung) passend zur Netzteilklasse. Ab einem 300-W-Netzteil ist eine USV eingerechnet. Beträge sind gerundete Richtwerte inkl. MwSt., Momentaufnahme Juli 2026.
+</div>
+
+<!-- ===== CLUSTER 0 ===== -->
+<h2 class="cluster nano" id="c0">Cluster 0 – Raspberry Pi 5 <span class="tag nano">≈ 0,2–3B Parameter · Edge / Always-on · CPU-only</span></h2>
+<p class="cluster-desc">Sinnvoll als extrem sparsamer, lautloser 24/7-Mini-Server im Netzwerk – aber nur für sehr kleine Modelle. Kein Ersatz für GPU-Systeme. OS: Raspberry Pi OS (64-bit, ARM/Linux).</p>
+<div class="tbl-scroll">
+<table class="models-tbl">
+<thead><tr><th>Modell</th><th>Parameter</th><th>RAM-Bedarf (Q4)</th><th>Empf. Board (neu)</th><th>Board-Preis (neu)</th><th>Tempo (CPU)</th><th>Stromkosten*</th><th>Gesamtkosten System (Neuware)</th><th>Betriebssysteme</th><th>Weitere HW</th></tr></thead>
+<tbody>
+<tr><td class="model-name">Gemma 3 1B</td><td>1 Mrd.</td><td>&lt;1 GB</td><td>Pi 5 (8 GB)</td><td class="price">~125–199 €</td><td>~18–22 t/s</td><td class="power">~2–6 €/J <span class="ref">(24/7, ~5–8W)</span></td><td class="total">~450–550 € <span class="ref">(Pi, 2×SSD-Spiegel, kl. USV)</span></td><td class="os">Raspberry Pi OS</td><td>Aktiv-Kühler Pflicht; 27W-Netzteil</td></tr>
+<tr><td class="model-name">Llama 3.2 1B</td><td>1 Mrd.</td><td>~1 GB</td><td>Pi 5 (8 GB)</td><td class="price">~125–199 €</td><td>~8–17 t/s</td><td class="power">~2–6 €/J <span class="ref">(24/7)</span></td><td class="total">~450–550 €</td><td class="os">Raspberry Pi OS</td><td>Aktiv-Kühler; 27W-Netzteil</td></tr>
+<tr><td class="model-name">Llama 3.2 3B</td><td>3 Mrd.</td><td>~2,5 GB</td><td>Pi 5 (8 GB)</td><td class="price">~125–199 €</td><td>~5–9 t/s</td><td class="power">~2–6 €/J <span class="ref">(24/7)</span></td><td class="total">~450–550 €</td><td class="os">Raspberry Pi OS</td><td>Aktiv-Kühler; NVMe empf.</td></tr>
+<tr><td class="model-name">Phi-3.5 Mini 3.8B</td><td>3,8 Mrd.</td><td>~3 GB</td><td>Pi 5 (8 GB)</td><td class="price">~125–199 €</td><td>~4–7 t/s</td><td class="power">~2–6 €/J <span class="ref">(24/7)</span></td><td class="total">~450–550 €</td><td class="os">Raspberry Pi OS</td><td>Aktiv-Kühler; NVMe empf.</td></tr>
+<tr><td class="model-name">Qwen2.5 7B / Llama 3.1 8B</td><td>7–8 Mrd.</td><td>~5–6 GB</td><td>Pi 5 (16 GB) – nur Batch</td><td class="price">~205–305 €</td><td>~2–3 t/s</td><td class="power">~3–8 €/J <span class="ref">(24/7)</span></td><td class="total">~550–680 € <span class="ref">(16GB-Pi, 2×SSD, USV; opt. AI HAT+ 2 ~130 $)</span></td><td class="os">Raspberry Pi OS</td><td>Aktiv-Kühler Pflicht; NVMe</td></tr>
+</tbody>
+</table>
+</div>
+<div class="note red">
+  <b>Einschränkungen des Raspberry Pi 5:</b> Reine CPU-Inferenz ohne GPU – harte Tempogrenze. Modelle bis ~3B laufen in Chat-Geschwindigkeit; 7–8B nur ~2–3 t/s (praktisch nur Batch, kein flüssiger Chat). Über ~8B unpraktikabel. Kein paralleler Mehrbenutzerbetrieb. Aktiv-Kühler und offizielles 27W-Netzteil Pflicht. USV: Der Pi läuft mit 5V/USB-C – hier genügt statt 230V-USV oft eine Powerbank mit Pass-Through/USV-HAT. Pi-Preise 2026 durch Speicherknappheit erhöht &amp; schwankend.
+</div>
+<div class="usecases">
+  <div class="uc-card priv"><h4>Typische Einsätze – Privat</h4><ul>
+    <li>Offline-Sprachassistent / Smart-Home-Steuerung (Whisper + Piper), der nicht „nach Hause telefoniert“</li>
+    <li>Immer-an-Notiz- &amp; Frage-Antwort-Box im Heimnetz (kleine Modelle)</li>
+    <li>Autarke Offline-Wissensbox (z. B. Erste-Hilfe-Referenz) aus dem Akku</li>
+  </ul></div>
+  <div class="uc-card kmu"><h4>Typische Einsätze – KMU</h4><ul>
+    <li>Leichte Automatisierung: E-Mail-Triage/Priorisierung auf NAS-nahem Mini-Server</li>
+    <li>Lokaler Vorfilter/Klassifikator, der Anfragen an ein größeres System weiterreicht</li>
+    <li>Edge-Vorverarbeitung (mit AI HAT+): einfache Bild-/Sensorerkennung vor Ort</li>
+  </ul></div>
+</div>
+
+<!-- ===== CLUSTER 1 ===== -->
+<h2 class="cluster klein" id="c1">Cluster 1 – Kleine Modelle <span class="tag klein">≈ 1–9B Parameter · Einstieg, Laptop/kleine GPU</span></h2>
+<p class="cluster-desc">Laufen teils auf CPU, sonst mit günstiger Neu-GPU. Schnell, sparsam, ideal zum Einstieg. OS: Windows, Linux/Unix &amp; macOS.</p>
+<div class="tbl-scroll">
+<table class="models-tbl">
+<thead><tr><th>Modell</th><th>Parameter</th><th>VRAM/Unified (Q4)</th><th>Empf. Grafikkarte (neu)</th><th>GPU-Preis (neu, nackt)</th><th>Günstigster Anbieter (Ref./Preis/Verfügb.)</th><th>Stromkosten*</th><th>Gesamtkosten System (Neuware)</th><th>Betriebssysteme</th><th>Weitere HW</th></tr></thead>
+<tbody>
+<tr><td class="model-name">Qwen3 4B</td><td>4 Mrd.</td><td>~3–4 GB</td><td>RTX 5060 Ti 16GB (neu) od. CPU</td><td class="price">ab ~333 €</td><td>PNY RTX 5060 Ti 16GB, Geizhals <span class="ref">(ab 332,89 €, lagernd)</span></td><td class="power">~30–80 €/J <span class="ref">(4h/Tag)</span></td><td class="total">~1.550–1.750 € <span class="ref">(PC neu, 2×990PRO-Spiegel, USV)</span></td><td class="os">Win · Linux · macOS</td><td>Standard-Kühler; 4–6-Kern-CPU; 16–32 GB RAM; 300W-NT + USV</td></tr>
+<tr><td class="model-name">Phi-4 Mini 3.8B</td><td>3,8 Mrd.</td><td>~3 GB</td><td>RTX 5060 Ti 16GB (neu) od. CPU</td><td class="price">ab ~333 €</td><td>PNY RTX 5060 Ti 16GB, Geizhals <span class="ref">(ab 332,89 €, lagernd)</span></td><td class="power">~30–80 €/J <span class="ref">(4h/Tag)</span></td><td class="total">~1.550–1.750 €</td><td class="os">Win · Linux · macOS</td><td>Boxed-Kühler; 4–6-Kern-CPU; 16–32 GB RAM; 300W-NT + USV</td></tr>
+<tr><td class="model-name">Llama 3.1 8B</td><td>8 Mrd.</td><td>~5–6 GB</td><td>RTX 5060 Ti 16GB (neu)</td><td class="price">ab ~333 €</td><td>PNY RTX 5060 Ti 16GB, Geizhals <span class="ref">(ab 332,89 €, lagernd)</span></td><td class="power">~50–110 €/J <span class="ref">(GPU ~150W, 4h/Tag)</span></td><td class="total">~1.600–1.800 €</td><td class="os">Win · Linux · macOS</td><td>Dual-Fan; 6-Kern-CPU; 32 GB RAM; 550W-NT + USV</td></tr>
+<tr><td class="model-name">Gemma 3 4B (Vision)</td><td>4 Mrd.</td><td>~4 GB</td><td>RTX 5060 Ti 16GB (neu)</td><td class="price">ab ~333 €</td><td>PNY RTX 5060 Ti 16GB, Geizhals <span class="ref">(ab 332,89 €, lagernd)</span></td><td class="power">~30–80 €/J <span class="ref">(4h/Tag)</span></td><td class="total">~1.550–1.750 €</td><td class="os">Win · Linux · macOS</td><td>Standard-Kühler; 4–6-Kern-CPU; 32 GB RAM; 300W-NT + USV</td></tr>
+<tr><td class="model-name">Mistral 7B Instruct</td><td>7 Mrd.</td><td>~5 GB</td><td>RTX 5060 Ti 16GB (neu)</td><td class="price">ab ~333 €</td><td>PNY RTX 5060 Ti 16GB, Geizhals <span class="ref">(ab 332,89 €, lagernd)</span></td><td class="power">~50–110 €/J <span class="ref">(4h/Tag)</span></td><td class="total">~1.600–1.800 €</td><td class="os">Win · Linux · macOS</td><td>Dual-Fan; 6-Kern-CPU; 32 GB RAM; 550W-NT + USV</td></tr>
+</tbody>
+</table>
+</div>
+<div class="usecases">
+  <div class="uc-card priv"><h4>Typische Einsätze – Privat</h4><ul>
+    <li>Privater Chat-Assistent &amp; Textformulierung (E-Mails, Bewerbungen) – offline</li>
+    <li>Zusammenfassen von PDFs, Artikeln und Notizen auf dem eigenen Rechner</li>
+    <li>Sprachen lernen &amp; Übersetzen ohne Cloud (Qwen: 100+ Sprachen)</li>
+  </ul></div>
+  <div class="uc-card kmu"><h4>Typische Einsätze – KMU</h4><ul>
+    <li>Interner FAQ-/Wissens-Bot über eigene Dokumente (leichtes RAG)</li>
+    <li>E-Mail-Entwürfe, Angebotstexte &amp; Produktbeschreibungen automatisiert</li>
+    <li>Klassifizieren &amp; Vorsortieren von Support-Anfragen und Formularen</li>
+  </ul></div>
+</div>
+
+<!-- ===== CLUSTER 2 ===== -->
+<h2 class="cluster mittel" id="c2">Cluster 2 – Mittlere Modelle <span class="tag mittel">≈ 12–35B Parameter · eine leistungsfähige Neu-GPU</span></h2>
+<p class="cluster-desc">Der „Sweet Spot“: deutlich stärkeres Reasoning und Coding auf einer einzelnen 16–32GB-Neukarte. Hinweis: 24GB als Neuware kaum noch günstig – für 27–32B ist neu die RTX 5090 (32GB) der klare Weg.</p>
+<div class="tbl-scroll">
+<table class="models-tbl">
+<thead><tr><th>Modell</th><th>Parameter</th><th>VRAM/Unified (Q4)</th><th>Empf. Grafikkarte (neu)</th><th>GPU-Preis (neu, nackt)</th><th>Günstigster Anbieter (Ref./Preis/Verfügb.)</th><th>Stromkosten*</th><th>Gesamtkosten System (Neuware)</th><th>Betriebssysteme</th><th>Weitere HW</th></tr></thead>
+<tbody>
+<tr><td class="model-name">Gemma 3 12B</td><td>12 Mrd.</td><td>~8 GB</td><td>RTX 5060 Ti 16GB (neu)</td><td class="price">ab ~333 €</td><td>PNY RTX 5060 Ti 16GB, Geizhals <span class="ref">(ab 332,89 €, lagernd)</span></td><td class="power">~55–120 €/J <span class="ref">(GPU ~180W, 4h/Tag)</span></td><td class="total">~1.650–1.850 € <span class="ref">(PC neu, 2×SSD-Spiegel, USV)</span></td><td class="os">Win · Linux · macOS</td><td>Dual-Fan; 6-Kern-CPU; 32 GB RAM; 550W-NT + USV</td></tr>
+<tr><td class="model-name">Phi-4 14B</td><td>14 Mrd.</td><td>~9 GB</td><td>RTX 5060 Ti 16GB (neu)</td><td class="price">ab ~333 €</td><td>PNY RTX 5060 Ti 16GB, Geizhals <span class="ref">(ab 332,89 €, lagernd)</span></td><td class="power">~55–120 €/J <span class="ref">(4h/Tag)</span></td><td class="total">~1.650–1.850 €</td><td class="os">Win · Linux · macOS</td><td>Dual-Fan; 6-Kern-CPU; 32 GB RAM; 550W-NT + USV</td></tr>
+<tr><td class="model-name">Phi-4-reasoning-vision 15B</td><td>15 Mrd.</td><td>~10 GB</td><td>RTX 5060 Ti 16GB (neu)</td><td class="price">ab ~333 €</td><td>PNY RTX 5060 Ti 16GB, Geizhals <span class="ref">(ab 332,89 €, lagernd)</span></td><td class="power">~55–120 €/J <span class="ref">(4h/Tag)</span></td><td class="total">~1.650–1.850 €</td><td class="os">Win · Linux · macOS</td><td>Dual-Fan; 6-Kern-CPU; 32 GB RAM; 550W-NT + USV</td></tr>
+<tr><td class="model-name">Gemma 3 27B</td><td>27 Mrd.</td><td>~16 GB (Q4) / 32GB komf.</td><td>RTX 5090 32GB (neu)</td><td class="price">ab ~4.099 €</td><td>Gainward RTX 5090 32GB, Geizhals <span class="ref">(ab 4.119 €, lagernd)</span></td><td class="power">~120–260 €/J <span class="ref">(GPU ~450W, 4h/Tag)</span></td><td class="total">~5.700–6.200 € <span class="ref">(PC neu, RTX 5090, 2×SSD, 1000W-NT, USV)</span></td><td class="os">Win · Linux · macOS</td><td>Sehr starke Kühlung; 8-Kern-CPU; 64 GB RAM; 1000W-NT + USV</td></tr>
+<tr><td class="model-name">Qwen3 32B</td><td>32 Mrd.</td><td>~18–22 GB</td><td>RTX 5090 32GB (neu)</td><td class="price">ab ~4.099 €</td><td>Gainward RTX 5090 32GB, Geizhals <span class="ref">(ab 4.119 €, lagernd)</span></td><td class="power">~120–260 €/J <span class="ref">(GPU ~450W, 4h/Tag)</span></td><td class="total">~5.700–6.200 €</td><td class="os">Win · Linux · macOS</td><td>Sehr starke Kühlung; 8-Kern-CPU; 64 GB RAM; 1000W-NT + USV</td></tr>
+</tbody>
+</table>
+</div>
+<div class="note amber">
+  <b>Hinweis Neuware &amp; 24-GB-Klasse:</b> Die früher als Preis-Leistungs-Tipp beliebte 24-GB-Karte war eine <em>gebrauchte</em> RTX 3090. Als Neuware nicht mehr verfügbar; die neue RTX 4090 (24GB) ist auslaufend und teuer (~3.490 €). Deshalb hier für 27–32B neu die <b>RTX 5090 (32GB, ab ~4.100 €)</b>. Wer die hohen Kosten scheut, bleibt bei 16-GB-Modellen (bis ~15B) oder geht auf den deutlich günstigeren &amp; sparsameren Mac-Weg (Cluster 3).
+</div>
+<div class="usecases">
+  <div class="uc-card priv"><h4>Typische Einsätze – Privat</h4><ul>
+    <li>Lokaler Coding-Assistent (Qwen3 32B) für eigene Projekte ohne Cloud</li>
+    <li>Anspruchsvolles Schreiben: Longform-Texte, Recherche-Notizen, Lektorat</li>
+    <li>Persönliche Wissensdatenbank mit RAG über eigene Dokumente &amp; Bilder</li>
+  </ul></div>
+  <div class="uc-card kmu"><h4>Typische Einsätze – KMU</h4><ul>
+    <li>Interner Coding-/DevOps-Helfer für das Entwicklerteam (Datenschutz)</li>
+    <li>Dokumentenanalyse: Verträge, Angebote, Rechnungen prüfen &amp; extrahieren</li>
+    <li>Kundenservice-Assistent &amp; Ticket-Beantwortung auf firmeneigenen Daten</li>
+  </ul></div>
+</div>
+
+<!-- ===== CLUSTER 3 ===== -->
+<h2 class="cluster gross" id="c3">Cluster 3 – Große Modelle <span class="tag gross">≈ 70–235B Parameter · Workstation / Multi-GPU / Unified Memory</span></h2>
+<p class="cluster-desc">Frontier-nahe Qualität lokal. Als Neuware: mehrere RTX 5090 (32GB) oder – deutlich günstiger, leiser &amp; sparsamer – ein Mac Studio mit viel Unified Memory. Gesamtkosten hier mit Enterprise-SSD (Power-Loss-Protection) im Spiegel.</p>
+<div class="tbl-scroll">
+<table class="models-tbl">
+<thead><tr><th>Modell</th><th>Parameter</th><th>VRAM/Unified (Q4)</th><th>Empf. GPU / System (neu)</th><th>GPU-Preis (neu, nackt)</th><th>Günstigster Anbieter (Ref./Preis/Verfügb.)</th><th>Stromkosten*</th><th>Gesamtkosten System (Neuware)</th><th>Betriebssysteme</th><th>Weitere HW</th></tr></thead>
+<tbody>
+<tr><td class="model-name">Llama 3.3 70B</td><td>70 Mrd.</td><td>~40–44 GB</td><td>2× RTX 5090 32GB / Mac Studio M4 Max 128GB</td><td class="price">ab ~8.200 €</td><td>2× Gainward RTX 5090 <span class="ref">(2×4.119 €)</span> · Alt.: Mac Studio ab ~2.300 €</td><td class="power">~200–420 €/J <span class="ref">(2×GPU ~600W, 4h/Tag)</span></td><td class="total">GPU: ~10.500–11.500 € · <span style="color:var(--accent)">Mac: ~3.400–3.800 €</span> <span class="ref">(je inkl. 2× Enterprise-SSD-Spiegel, USV)</span></td><td class="os">Linux · Win · macOS</td><td>Sehr starke Kühlung (2×GPU); 8–12-Kern-CPU; 128 GB RAM; 1500W-NT + USV (Mac: kein extra NT)</td></tr>
+<tr><td class="model-name">Qwen 2.5/3 72B</td><td>72 Mrd.</td><td>~42 GB</td><td>2× RTX 5090 32GB / Mac Studio M4 Max 128GB</td><td class="price">ab ~8.200 €</td><td>2× Gainward RTX 5090 <span class="ref">(2×4.119 €)</span> · Alt.: Mac Studio ab ~2.300 €</td><td class="power">~200–420 €/J <span class="ref">(2×GPU, 4h/Tag)</span></td><td class="total">GPU: ~10.500–11.500 € · <span style="color:var(--accent)">Mac: ~3.400–3.800 €</span></td><td class="os">Linux · Win · macOS</td><td>Starke Kühlung; 8–12-Kern-CPU; 128 GB RAM; 1500W-NT + USV</td></tr>
+<tr><td class="model-name">DeepSeek-R1 distill 70B</td><td>70 Mrd.</td><td>~40 GB</td><td>2× RTX 5090 32GB / Mac Studio M4 Max 128GB</td><td class="price">ab ~8.200 €</td><td>2× Gainward RTX 5090 <span class="ref">(2×4.119 €)</span> · Alt.: Mac Studio ab ~2.300 €</td><td class="power">~200–420 €/J <span class="ref">(2×GPU, 4h/Tag)</span></td><td class="total">GPU: ~10.500–11.500 € · <span style="color:var(--accent)">Mac: ~3.400–3.800 €</span></td><td class="os">Linux · Win · macOS</td><td>Starke Kühlung; 8–12-Kern-CPU; 128 GB RAM; 1500W-NT + USV</td></tr>
+<tr><td class="model-name">Mistral Large 3</td><td>~123 Mrd.</td><td>~70 GB</td><td>Mac Studio M4 Max 128GB / 3× RTX 5090</td><td class="price">ab ~12.300 €</td><td>Mac Studio M4 Max 128GB <span class="ref">(ab ~2.300 €)</span> · GPU-Alt.: 3× RTX 5090</td><td class="power">Mac ~25–55 €/J · <span class="ref">3×GPU ~300–630 €/J</span></td><td class="total"><span style="color:var(--accent)">Mac: ~3.500–3.900 €</span> · GPU: ~15.500–16.500 € <span class="ref">(inkl. Enterprise-SSD-Spiegel, USV)</span></td><td class="os">macOS · Linux</td><td>Mac empfohlen (leise, sparsam); GPU-Weg: 1500W+-NT + große USV</td></tr>
+<tr><td class="model-name">Qwen3 235B-A22B (MoE)</td><td>235 Mrd. (22B aktiv)</td><td>~88–104 GB</td><td>Mac Studio M4 Max 128GB (praktikabelster Weg, neu)</td><td class="price">System ab ~2.300 €</td><td>Mac Studio M4 Max 128GB, Apple/Händler <span class="ref">(ab ~2.300–2.600 €, lagernd)</span></td><td class="power">~25–55 €/J <span class="ref">(Mac ~85W, 4h/Tag)</span></td><td class="total"><span style="color:var(--accent)">~3.500–3.900 €</span> <span class="ref">(Mac neu + 2× Enterprise-SSD extern gespiegelt + USV)</span></td><td class="os">macOS · Linux</td><td>Lüfterleise (Mac); Unified Memory ersetzt GPU+RAM; USV für sauberes Herunterfahren</td></tr>
+</tbody>
+</table>
+</div>
+<div class="note red">
+  <b>Wirtschaftlichkeits-Hinweis (Neuware):</b> Bei großen Modellen kippt die Rechnung klar zugunsten des Macs. Ein Mac Studio M4 Max 128GB (~2.300 € Gerät, mit SSD-Spiegel &amp; USV ~3.500–3.900 € Gesamtsystem) läuft 70B-Modelle lautlos bei ~85W – ein Multi-GPU-Neubau mit 2×–3× RTX 5090 kostet als Neuware das <em>Drei- bis Vierfache</em> und zieht 600–1.200W. Der GPU-Weg lohnt neu nur, wenn maximale Token-Geschwindigkeit oder CUDA-spezifische Software zwingend nötig sind.
+</div>
+<div class="usecases">
+  <div class="uc-card priv"><h4>Typische Einsätze – Privat</h4><ul>
+    <li>Anspruchsvollster lokaler Allround-Assistent auf Cloud-Niveau, voll privat</li>
+    <li>Komplexe Analyse &amp; Reasoning: Mathe, Logik, große Recherche-Projekte</li>
+    <li>Hobby-Entwicklung ganzer Software-Projekte mit starkem lokalem Coding-Modell</li>
+  </ul></div>
+  <div class="uc-card kmu"><h4>Typische Einsätze – KMU</h4><ul>
+    <li>Firmeneigener KI-Assistent für alle Mitarbeitenden ohne Datenabfluss</li>
+    <li>Automatisierte Verarbeitung sensibler Dokumente (Recht, Medizin, Finanzen)</li>
+    <li>Agentische Workflows &amp; komplexe RAG-Systeme über große Wissensbestände</li>
+  </ul></div>
+</div>
+
+<!-- ===== ENTSCHEIDUNGSHILFE ===== -->
+<section class="card" id="entscheidung" style="margin-top:40px">
+  <h2>Entscheidungshilfe – welches Setup für wen? (alles Neuware)</h2>
+  <div class="risk-grid" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
+    <div class="risk"><b style="color:var(--nano)">Immer-an / Edge / sparsam</b><span style="color:var(--muted)">Privat &amp; KMU · ~450–680 €</span><p style="color:var(--klein);font-weight:600;margin:8px 0 4px;font-size:.85rem">Cluster 0 – Raspberry Pi 5</p><span>Nur kleine Modelle (≤3B flüssig). Ideal als 24/7-Assistent, Vorfilter oder Offline-Box.</span></div>
+    <div class="risk"><b style="color:var(--klein)">Ernsthaft privat / kleines Team</b><span style="color:var(--muted)">Privat &amp; KMU · ~1.550–1.850 €</span><p style="color:var(--klein);font-weight:600;margin:8px 0 4px;font-size:.85rem">Cluster 1–2 – RTX 5060 Ti 16GB</p><span>Bester Kompromiss. Bis ~15B inkl. Coding. Inkl. SSD-Spiegel &amp; USV.</span></div>
+    <div class="risk"><b style="color:var(--accent)">Große Modelle, sparsam &amp; leise</b><span style="color:var(--muted)">Ambitioniert &amp; KMU · ~3.400–3.900 €</span><p style="color:var(--klein);font-weight:600;margin:8px 0 4px;font-size:.85rem">Cluster 3 – Mac Studio M4 Max 128GB</p><span>70B–235B lokal, ~85W, lautlos. Preis-Leistungs-Sieger bei großen Modellen.</span></div>
+    <div class="risk"><b style="color:var(--gross)">Maximale Geschwindigkeit / CUDA</b><span style="color:var(--muted)">KMU / Profi · ~5.700–16.500 €</span><p style="color:var(--klein);font-weight:600;margin:8px 0 4px;font-size:.85rem">RTX 5090 32GB (neu), 1–3×</p><span>Für höchste Token-Rate oder CUDA-Pflicht. Teuer &amp; stromhungrig.</span></div>
+  </div>
+  <p style="margin-top:18px;font-size:.86rem;color:#cdd8e2"><b style="color:var(--nano)">Nach Betriebssystem:</b> <b>Linux/Unix</b> = beste Wahl für Server/Dauerbetrieb &amp; Multi-GPU. <b>Windows</b> = einfachster Einstieg mit NVIDIA. <b>macOS</b> = unschlagbar bei großen Modellen (Unified Memory, leise, sparsam), kein CUDA. <b>Raspberry Pi</b> = nur Edge/klein.</p>
+  <div class="note green">
+    <strong>* Stromkosten-Spalte:</strong> Schätzung auf Basis ~30 Cent/kWh (deutscher Bestandskunden-Durchschnitt Juli 2026), GPU-Systeme mit ~4 Std. aktiver Nutzung/Tag, Raspberry Pi 24/7. Reale Kosten hängen von Auslastung, Tarif &amp; Idle-Verhalten ab. Ein Mac mit ~85W ist im Betrieb dramatisch günstiger als ein Multi-GPU-Tower mit 600W+.
+  </div>
+  <a class="back" href="#top">↑ nach oben</a>
+</section>
+
+<!-- ===== PRAXISBETRIEB ===== -->
+<section class="card" id="praxis" style="margin-top:26px">
+  <h2>Praxisbetrieb – Architektur, Administration, Fernzugriff &amp; Arbeitsweise</h2>
+  <p style="color:var(--muted);font-size:.86rem;margin-top:-4px">Die Hardware ist nur die halbe Miete. Für den Alltag entscheidend ist, wie die eigenen Anwendungen (n8n, Hermes, Editoren) an das Modell andocken, welche Administration bei einem selbst bleibt und wie der Zugriff von unterwegs sicher gelingt.</p>
+
+  <h3 class="sub-h">1 · Abstraktionsschichten – wie eigene Anwendungen andocken</h3>
+  <p style="font-size:.87rem;color:#cdd8e2">Der Schlüssel ist eine <b>OpenAI-kompatible API</b> als gemeinsame Sprache. Von unten nach oben:</p>
+  <div class="tbl-scroll" style="margin-top:12px">
+  <table style="min-width:820px">
+  <thead><tr><th>Schicht</th><th>Bausteine</th><th>Aufgabe</th></tr></thead>
+  <tbody>
+  <tr><td class="model-name" style="color:var(--nano)">1. Modell-Runtime</td><td><code>Ollama</code> (einfach) oder <code>vLLM</code> (Hochlast/Multi-GPU)</td><td>Lädt das Modell, rechnet die Inferenz, stellt einen REST-Endpoint bereit. Ollama spricht ab Werk das OpenAI-Format auf Port 11434.</td></tr>
+  <tr><td class="model-name" style="color:var(--klein)">2. Gateway (optional)</td><td><code>LiteLLM</code> als einheitliches Tor</td><td>Bündelt lokale Modelle (und bei Bedarf externe APIs) hinter <em>einem</em> Endpoint, mit Nutzer-Limits, Budgets &amp; Logging. Für KMU mit mehreren Nutzern sinnvoll.</td></tr>
+  <tr><td class="model-name" style="color:var(--mittel)">3. RAG / Wissens-Layer</td><td>Vektor-DB (<code>Qdrant</code>), Parser (<code>Apache Tika</code>), Embeddings</td><td>Macht eigene Dokumente/Markdown durchsuchbar &amp; „fütterbar“. Herzstück, wenn eigene Inhalte in den Fokus rücken (Punkt 4).</td></tr>
+  <tr><td class="model-name" style="color:var(--gross)">4. Anwendungen</td><td><code>n8n</code>, <code>Hermes</code>, <code>OpenCode</code>, Open WebUI, IDE-Plugins</td><td>Eure Werkzeuge. Alle zeigen nur auf die Basis-URL des Endpoints – kein Code-Umbau, wenn das Modell wechselt.</td></tr>
+  </tbody>
+  </table>
+  </div>
+  <div class="note green" style="margin-top:14px">
+    <strong>Konkret für n8n:</strong> Der „Ollama Chat Model“-Node (oder HTTP-Request-Node) zeigt auf <code>http://ollama:11434</code>. Bei Docker: Aus dem n8n-Container ist <code>localhost</code> der Container selbst – stattdessen Service-Namen (<code>ollama</code>) oder <code>host.docker.internal</code> nutzen. Für Extraktion/Klassifikation reicht ein 8B-Modell in 4-Bit; JSON-Schema im System-Prompt fixieren und <b>jede Ausgabe validieren</b> (Fehler in „needs review“-Zweig statt Absturz). Immer ein Max-Iterations-Limit für Agent-Schleifen setzen.
+  </div>
+  <div class="note green" style="margin-top:12px">
+    <strong>Hermes &amp; OpenCode als Abstraktion:</strong> <b>Hermes</b> (Nous-Agent-Gateway) kann selbst als Schicht 4 dienen – verbindet den lokalen Endpoint mit vielen Kanälen (WhatsApp, Telegram, Signal, E-Mail, Matrix) und macht euren KI-Assistenten per Messenger erreichbar. <b>OpenCode</b> (Terminal-Coding-Agent, quelloffen) lässt sich ebenfalls auf einen lokalen OpenAI-kompatiblen Endpoint richten und übernimmt agentische Coding- &amp; Admin-Aufgaben direkt auf dem Server (siehe Punkt 2).
+  </div>
+
+  <h3 class="sub-h">2 · Welche Administration bleibt bei einem selbst?</h3>
+  <p style="font-size:.87rem;color:#cdd8e2">Onsite heißt: Ihr seid der Betreiber. Diese Aufgaben fallen an – planbar, aber real:</p>
+  <ul class="plainlist">
+    <li><b>Betriebssystem &amp; Treiber:</b> OS-Updates, NVIDIA-/CUDA-Treiber aktuell halten (unter Linux häufigste Fehlerquelle).</li>
+    <li><b>Runtime &amp; Modelle:</b> Ollama/vLLM updaten, neue Modellversionen ziehen, alte aufräumen, Quantisierung wählen.</li>
+    <li><b>Verfügbarkeit („always-on“):</b> Dienste als Autostart (systemd/Proxmox), Prozess-Supervisor gegen Abstürze, Neustart nach Stromausfall (dafür die USV).</li>
+    <li><b>Datensicherung:</b> Der SSD-Spiegel (RAID-1) schützt vor Plattenausfall – <em>ersetzt aber kein Backup</em>. Zusätzlich Konfigurationen, Vektor-DB &amp; Markdown-Bestände sichern (off-site/verschlüsselt).</li>
+    <li><b>Sicherheit:</b> Zugriff einschränken (VPN), Reverse-Proxy/Auth wo nötig, Log-Kontrolle. <b>Unverhandelbar:</b> ein roher Ollama-Port gehört <em>nie</em> ins offene Internet – keine eingebaute Authentifizierung.</li>
+    <li><b>Monitoring:</b> GPU-Temperatur/-Auslastung, Speicher, Plattenfüllstand; optional Tracing (Langfuse).</li>
+  </ul>
+  <div class="note green" style="margin-top:12px">
+    <strong>Wie weit helfen OpenCode / Hermes bei der Admin?</strong> Einiges lässt sich delegieren: <b>OpenCode</b> kann als agentischer Terminal-Assistent Update-Skripte schreiben/ausführen, Logs auswerten, Backup-Jobs anlegen und Configs pflegen – unter menschlicher Freigabe. <b>Hermes</b> kann Benachrichtigungen &amp; einfache Steuerbefehle über Messenger entgegennehmen („Status?“, „Modell X laden“). <em>Grenze:</em> Treiber-/Kernel-Probleme, Hardware &amp; Sicherheitsentscheidungen bleiben menschlich – ein Agent mit Root-Rechten ist selbst ein Risiko und muss eng eingezäunt werden.
+  </div>
+
+  <h3 class="sub-h">3 · Fernzugriff von unterwegs – ausschließlich über VPN-Tunnel</h3>
+  <p style="font-size:.87rem;color:#cdd8e2">Der richtige Ansatz: Endpoint bleibt an <code>localhost</code>/LAN gebunden, von außen kommt man nur über ein privates Overlay-Netz hinein – <b>keine offenen Ports, keine Portweiterleitung</b>. Zwei empfehlenswerte Wege:</p>
+  <div class="tbl-scroll" style="margin-top:12px">
+  <table style="min-width:820px">
+  <thead><tr><th>VPN-Lösung</th><th>Charakter</th><th>Für wen</th></tr></thead>
+  <tbody>
+  <tr><td class="model-name" style="color:var(--accent)">Tailscale</td><td>WireGuard-basiertes Mesh-VPN, extrem einfach (Zero-Config, NAT-Traversal automatisch). Client auf Server &amp; Laptop/Handy, fertig.</td><td>Empfehlung für Privat &amp; die meisten KMU – schnellster, sicherer Weg. Zugriff nur für Geräte im eigenen „Tailnet“.</td></tr>
+  <tr><td class="model-name" style="color:var(--klein)">WireGuard (pur)</td><td>Schlankes, sehr schnelles VPN-Protokoll, selbst gehostet (volle Kontrolle, keine Drittanbieter-Koordination). Etwas mehr Einrichtung.</td><td>KMU mit Netz-Know-how, die alles selbst in der Hand haben wollen; Basis für ein klassisches Firmen-VPN.</td></tr>
+  </tbody>
+  </table>
+  </div>
+  <p style="font-size:.86rem;color:#cdd8e2;margin-top:10px"><b>Empfehlung:</b> <code>Tailscale</code> (nutzt WireGuard) für den einfachen, sicheren Einstieg; reines <code>WireGuard</code> für maximale Eigenkontrolle. In beiden Fällen: Modell-Port an <code>localhost</code> gebunden lassen, Zugriff ausschließlich übers VPN. Handy &amp; Laptop bekommen den VPN-Client – dann verhält sich der heimische KI-Server, als liefe er lokal.</p>
+
+  <h3 class="sub-h">3b · Mobile KI-Chat-Clients (über VPN mit dem eigenen Server verbunden)</h3>
+  <p style="font-size:.87rem;color:#cdd8e2">Sobald der VPN-Tunnel steht, verhält sich der heimische Endpoint fürs Handy wie ein lokaler Dienst. Diese Apps geben eine ChatGPT-artige Oberfläche, zeigen aber auf <em>euren</em> Server (typisch <code>http://&lt;server-im-tailnet&gt;:11434</code>). Ablauf: VPN-Client (Tailscale/WireGuard) verbinden → Server-Adresse eintragen → chatten.</p>
+  <div class="tbl-scroll" style="margin-top:12px">
+  <table style="min-width:900px">
+  <thead><tr><th>App</th><th>Plattform</th><th>Charakter</th><th>Besonderheiten</th></tr></thead>
+  <tbody>
+  <tr><td class="model-name" style="color:var(--accent)">Reins</td><td>iOS · Android · macOS</td><td>Aktuell ausgereiftester, funktionsreichster Ollama-Client. Open Source, ohne Login/Konto/Datensammlung.</td><td>Mehrere Server verwalten &amp; wechseln, Tools &amp; Web-Suche, PDF-/CSV-Anhänge, Thinking-Mode, Parameter pro Chat, Hintergrund-Generierung. <b>Top-Empfehlung für beide Plattformen.</b></td></tr>
+  <tr><td class="model-name" style="color:var(--klein)">Enchanted</td><td>iOS · macOS · visionOS</td><td>Elegante, native SwiftUI-App im Apple-Look – „ChatGPT-UI für private Modelle“. Open Source.</td><td>Sehr gute Apple-Integration (inkl. Watch/Vision Pro), Sprach-Prompts, Bildanhänge, Markdown. <b>Empfehlung für reine Apple-Nutzer.</b></td></tr>
+  <tr><td class="model-name" style="color:var(--mittel)">Chatbox</td><td>iOS · Android · Desktop</td><td>Schlanke, simple Chat-App; verbindet sich mit Ollama sowie OpenAI-kompatiblen Endpoints.</td><td>Minimale Konfiguration, guter „Daily Driver“. Grenze: kein RAG, kein Mehrbenutzer.</td></tr>
+  <tr><td class="model-name" style="color:var(--gross)">Open WebUI (als PWA)</td><td>iOS · Android (Browser/PWA)</td><td>Kein natives App-Paket, sondern die self-hosted Web-Oberfläche, als Web-App aufs Handy gelegt.</td><td>Volle Funktionsbreite (RAG über eigene Dokumente, Web-Suche, Mehrbenutzer). Ideal, wenn ihr Open WebUI ohnehin als „Haustür“ betreibt.</td></tr>
+  </tbody>
+  </table>
+  </div>
+  <div class="note green" style="margin-top:14px">
+    <strong>Sicherheits-Hinweis zu Mobil-Clients:</strong> Viele Tutorials empfehlen öffentliche Tunnel (ngrok, Cloudflare Tunnel) – das widerspricht der VPN-only-Vorgabe. Bleibt beim VPN: der Endpoint ist <em>nie</em> öffentlich erreichbar. In der App wird einfach die interne VPN-Adresse eingetragen. Für unterwegs kurz den VPN-Client aktivieren; danach ist der KI-Chat wie zu Hause nutzbar.
+  </div>
+
+  <h3 class="sub-h">4 · Geänderte Arbeitsweise – eigene Markdown-Dateien rücken in den Fokus</h3>
+  <p style="font-size:.87rem;color:#cdd8e2">Der wichtigste Kultur-Wechsel: weg von verstreuten Dokumenten in proprietären Formaten, hin zu einer <b>gepflegten Markdown-Wissensbasis</b> als „Single Source of Truth“, die das lokale Modell durchsuchen und nutzen kann.</p>
+  <ul class="plainlist">
+    <li><b>Markdown als Grundformat:</b> Klartext, versionierbar (Git), diff-bar, langlebig, von jedem Tool lesbar – ideal als RAG-Quelle. Notizen, Prozesse, Angebote, FAQ wandern nach <code>.md</code>.</li>
+    <li><b>Struktur statt Ablage:</b> Konsistente Ordner, klare Dateinamen, Front-Matter-Metadaten (Tags, Datum) – verbessert die Retrieval-Qualität spürbar.</li>
+    <li><b>Der neue Loop:</b> Schreiben → in die Vektor-DB indexieren → Modell fragt/ergänzt/fasst zusammen → Ergebnis fließt wieder als Markdown zurück. Werkzeuge: Obsidian + lokaler Endpoint oder Open WebUI mit RAG.</li>
+    <li><b>Automatisierung:</b> n8n-Flows indexieren neue/geänderte Markdown-Dateien automatisch; OpenCode restrukturiert Bestände; Hermes liefert Antworten unterwegs per Messenger.</li>
+    <li><b>Disziplin als Voraussetzung:</b> Die KI ist nur so gut wie die gepflegte Basis. Kuratieren und altlastenfrei halten wird zur regelmäßigen Tätigkeit – das ist der eigentliche Arbeitsweisen-Wandel.</li>
+  </ul>
+  <a class="back" href="#top">↑ nach oben</a>
+</section>
+
+<!-- ===== CPU & FERTIGRECHNER ===== -->
+<section class="card" id="cpu" style="margin-top:26px">
+  <h2>CPU-Empfehlungen &amp; fertig konfektionierte Rechner pro Cluster</h2>
+  <p style="color:var(--muted);font-size:.86rem;margin-top:-4px">Für lokale KI-Inferenz gilt: Die GPU (bzw. beim Mac das Unified Memory) macht das Tempo, die CPU übernimmt Datenladen, Tokenisierung &amp; Orchestrierung. Wichtig sind solide Mehrkern-Leistung und – bei Multi-GPU – genügend PCIe-Lanes, nicht der höchste Single-Core-Takt.</p>
+  <div class="tbl-scroll" style="margin-top:16px">
+  <table style="min-width:900px">
+  <thead><tr><th>Cluster</th><th>Typische CPU (neu)</th><th>Warum</th><th>Fertigrechner Dell</th><th>Fertigrechner Lenovo ThinkStation</th></tr></thead>
+  <tbody>
+  <tr><td class="model-name" style="color:var(--nano)">0 – Pi</td><td>Broadcom BCM2712 (ARM, 4-Kern) – im Pi 5 fest verbaut</td><td>Kein Wahlthema; SoC ist Teil des Boards. Für ≤3B-Modelle ausreichend.</td><td colspan="2" style="color:var(--muted)">— (keine Fertig-Workstation; das Board <em>ist</em> der Rechner)</td></tr>
+  <tr><td class="model-name" style="color:var(--klein)">1 – klein</td><td>Intel Core i5-14400 / AMD Ryzen 5 7600 (6 Kerne)</td><td>Günstig, sparsam, ausreichend für 1–9B auf einer 16GB-GPU.</td><td>Dell Precision 3280 Compact / OptiPlex Tower <span class="ref">(i5/i7, RTX-fähiger Slot)</span></td><td>ThinkStation P3 Tower Gen 2 <span class="ref">(Core i5/i7 od. Core Ultra 7)</span></td></tr>
+  <tr><td class="model-name" style="color:var(--mittel)">2 – mittel</td><td>AMD Ryzen 9 9950X (16 Kerne) / Intel Core i9-14900K (24 Kerne)</td><td>Starke Mehrkern-Leistung + PCIe 5.0 für eine schnelle GPU. Default für Single-GPU.</td><td>Dell Precision 3680 Tower <span class="ref">(i9, RTX bis 5090-Klasse)</span></td><td>ThinkStation P3 Ultra / P5 <span class="ref">(Core Ultra 9 od. Xeon W)</span></td></tr>
+  <tr><td class="model-name" style="color:var(--gross)">3 – groß (GPU-Weg)</td><td>AMD Threadripper 7960X (24 K.) / 7980X (64 K.) – ECC, 48–92 PCIe-Lanes</td><td>Nur so laufen 2–3× RTX 5090 mit vollem x16 ohne „Lane-Starvation“. ECC für 24/7.</td><td>Dell Precision 7875 Tower <span class="ref">(Threadripper PRO, 2× GPU, bis 1TB RAM)</span></td><td>ThinkStation P8 <span class="ref">(Threadripper PRO 7000WX, WRX90, 2× GPU)</span></td></tr>
+  <tr><td class="model-name" style="color:var(--accent)">3 – groß (Mac-Weg)</td><td>Apple M4 Max (SoC, 16-Kern-CPU + Unified Memory)</td><td>Empfohlener Weg für 70B–235B: CPU, GPU &amp; RAM in einem, ~85W, lautlos.</td><td colspan="2" style="color:var(--muted)">— (Mac Studio M4 Max 128GB ist selbst der Fertigrechner)</td></tr>
+  </tbody>
+  </table>
+  </div>
+  <div class="note green" style="margin-top:18px">
+    <strong>Fertigrechner vs. Eigenbau:</strong> Dell Precision und Lenovo ThinkStation kommen <b>validiert, mit Herstellergarantie (oft 3 Jahre vor Ort) und ISV-Zertifizierung</b> – wichtig für KMU, regulierte Daten und wenn Ausfallzeit teuer ist. Ein Eigenbau spart grob 15–30 %, erfordert aber Aufbau &amp; Support selbst. Für Cluster 1–2 sind beide Wege gut; für Cluster 3 (Multi-GPU, ECC, 24/7) sprechen Stabilität &amp; Garantie stark für die Fertig-Workstation. Threadripper-PRO-Workstations von Dell/Lenovo starten je nach GPU-Bestückung im mittleren vier- bis fünfstelligen Bereich – Preise variieren stark nach Konfiguration, beim Hersteller/Fachhändler erfragen.
+  </div>
+  <a class="back" href="#top">↑ nach oben</a>
+</section>
+
+<!-- ===== DISCLAIMER + FOOTER ===== -->
+<div class="note amber" style="margin-top:24px">
+  <strong>Hinweise:</strong> <b>Alle Preise = Neuware</b> (keine Gebrauchtware). Es gibt <b>kein „Phi-5“</b> – aktuellste Phi-Generation ist Phi-4 bzw. Phi-4-reasoning-vision-15B (März 2026); für sehr kleine Systeme Phi-3.5 Mini. VRAM/RAM-Angaben für gängige <code>Q4</code>-Quantisierung. „GPU-Preis (neu, nackt)“ = reine Grafikkarte. <b>Gesamtkosten System</b> = kompletter Rechner inkl. Mainboard, CPU, RAM, Gehäuse, Kühlung, <b>gespiegeltem High-End-SSD-Failover (2× NVMe im RAID-1; großer Cluster mit Power-Loss-Protection)</b> und <b>USV</b> (ab 300-W-Netzteil eingerechnet). Beim Mac ersetzt Unified Memory GPU-VRAM &amp; System-RAM. Einstieg über <code>Ollama</code> oder <code>LM Studio</code> (kostenlos). Alle Beträge gerundete Richtwerte, Momentaufnahme, ohne Gewähr.
+</div>
+
+<footer>
+  <p><strong>Quellen &amp; Stand (Juli 2026):</strong> Modell-/VRAM-Angaben aus aktuellen Vergleichen (Hugging Face, SitePoint, InsiderLLM, PromptQuorum, TechSy); Phi-Historie: Wikipedia/innfactory. GPU-Neupreise: Geizhals Deutschland (RTX 5060 Ti 16GB ab ~333 €; RTX 5090 32GB ab ~4.119 €; RTX 4090 24GB neu ~3.490 €, auslaufend). SSD-Preise: Geizhals (Samsung 990 PRO 2TB ~299 €; Enterprise-NVMe mit PLP ~388 €+). Mac: LLMCheck, CraftRigs, WillItRunAI. Raspberry Pi: TinyWeights, raspberry.tips, LocalAIMaster. Strompreis: strom-report.de/Finanztip (~30 Ct/kWh). Architektur/Betrieb: glukhov.org, digitalapplied.com, jameskilby.co.uk, aitoolpipelines.com. Mobile-Clients: GitHub (Enchanted, Reins), localaimaster.com, lmsa.app. Fertigrechner: petronellatech.com, aluxurylifestyle.com, Lenovo/Dell. USV: marktüblich ~150–600 € je Leistungsklasse. Alle Preise inkl. MwSt., ohne Gewähr – ändern sich schnell.</p>
+  <p style="margin-top:10px">Informative Orientierungshilfe, keine Kauf-, Steuer- oder Rechtsberatung im Einzelfall.</p>
+</footer>
+
+</div>
+</body>
+</html>
