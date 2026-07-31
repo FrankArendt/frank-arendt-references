@@ -96,6 +96,7 @@
 <nav class="toc" id="top">
   <h3>Inhalt</h3>
   <ol>
+    <li><a href="#aktualitaet">Wichtiger Hinweis: Aktualität, Grenzen &amp; fehlendes Benchmarking</a></li>
     <li><a href="#risiken">Warum onsite? Risiken großer Cloud-KI</a></li>
     <li><a href="#os">Betriebssysteme im Überblick</a></li>
     <li><a href="#kosten">Zur Kostenkalkulation (SSD-Spiegel &amp; USV)</a></li>
@@ -106,8 +107,26 @@
     <li><a href="#entscheidung">Entscheidungshilfe nach Budget</a></li>
     <li><a href="#praxis">Praxisbetrieb: Architektur, Admin, VPN, Mobile, Markdown</a></li>
     <li><a href="#cpu">CPU-Empfehlungen &amp; Fertigrechner (Dell / ThinkStation)</a></li>
+    <li><a href="#ausblick">Vom Cloud-Dienst zum persönlichen KI-Begleiter</a></li>
+    <li><a href="#glossar">Glossar</a></li>
+    <li><a href="#impressum">Impressum</a></li>
   </ol>
 </nav>
+
+<!-- ===== AKTUALITÄTSHINWEIS ===== -->
+<section class="card" id="aktualitaet" style="border-color:rgba(224,164,88,.4)">
+  <h2 style="color:var(--mittel)">⚠ Wichtiger Hinweis: Aktualität, Grenzen &amp; fehlendes Benchmarking</h2>
+  <p><b>Aktualität.</b> Diese Aufstellung ist eine Momentaufnahme (Stand siehe Kopfzeile). Den Markt der offenen LLMs als „hochdynamisch“ zu beschreiben, ist vermutlich noch untertrieben: Modelle, Preise, Treiber und Werkzeuge ändern sich teils im Wochentakt. Neue Modellgenerationen, GPU-Releases und Preisbewegungen können einzelne Angaben hier binnen Tagen überholen. <b>Alle Zahlen sind gerundete Richtwerte und vor einer Kaufentscheidung frisch zu prüfen</b> (bevorzugt an der Originalquelle, z. B. Geizhals für Preise, die Modell-Karten der Hersteller für Spezifikationen).</p>
+
+  <p><b>Was diesem Dokument bewusst fehlt: echtes Benchmarking.</b> Diese Aufstellung ordnet Modelle und Hardware nach Parametern, Speicherbedarf und Kosten – sie ersetzt <em>kein</em> reproduzierbares Benchmarking. Wirklich wertvoll wäre, konkrete <b>Anforderungsszenarien</b> (z. B. „Rechnungen extrahieren“, „deutschsprachiges Lektorat“, „Python-Refactoring“, „RAG über 5.000 PDFs“) gegen definierte <b>Modell-/Hardware-Kombinationen</b> zu testen und die Ergebnisse messbar zu bewerten: Antwortqualität, Tokens/Sekunde, Latenz, Stromverbrauch und Kosten pro 1.000 Anfragen. Solche belastbaren, unabhängigen Vergleiche gibt es bisher kaum in strukturierter Form.</p>
+
+  <div class="note green" style="margin-top:4px">
+    <strong>Anmerkung (Geschäftsmodell):</strong> Hier steckt vermutlich echter, bezahlbarer Mehrwert – unabhängiges, szenariobasiertes Benchmarking von Modell-Hardware-Kombinationen wäre eine Information, für die Kunden zahlen würden. Hoffentlich erkennt das bald jemand und bietet es an. Bis dahin bleibt diese Aufstellung notwendigerweise auf Spezifikationen und plausible Einordnung beschränkt.
+  </div>
+
+  <p style="margin-top:14px"><b>Zu den Anwendungsbereichen.</b> Die je Cluster genannten Einsatzgebiete sind <em>plausible Orientierung</em>, kein Leistungsversprechen. Herstellerangaben zu „Fähigkeiten“ eines Modells sind mit Vorsicht zu genießen – sie ähneln oft dem klassischen Vertriebsversprechen: <em>„Natürlich kann das System Toast backen – Sie müssen nur sagen, welches Rezept.“</em> Ob eine konkrete Modell-Hardware-Kombination eine bestimmte Aufgabe in ausreichender Qualität löst, zeigt erst der eigene Test mit den eigenen Daten. <b>Im Zweifel: klein anfangen, real ausprobieren, dann skalieren.</b></p>
+  <a class="back" href="#top">↑ nach oben</a>
+</section>
 
 <!-- ===== RISIKEN ===== -->
 <section class="card" id="risiken">
@@ -140,7 +159,7 @@
 </div>
 
 <!-- ===== CLUSTER 0 ===== -->
-<h2 class="cluster nano" id="c0">Cluster 0 – Raspberry Pi 5 <span class="tag nano">≈ 0,2–3B Parameter · Edge / Always-on · CPU-only</span></h2>
+<h2 class="cluster nano" id="c0">Cluster 0 – Raspberry Pi 5 <span class="tag nano">≈ 0,2–3 Mrd. Parameter · Edge / Always-on · CPU-only</span></h2>
 <p class="cluster-desc">Sinnvoll als extrem sparsamer, lautloser 24/7-Mini-Server im Netzwerk – aber nur für sehr kleine Modelle. Kein Ersatz für GPU-Systeme. OS: Raspberry Pi OS (64-bit, ARM/Linux).</p>
 <div class="tbl-scroll">
 <table class="models-tbl">
@@ -155,7 +174,20 @@
 </table>
 </div>
 <div class="note red">
-  <b>Einschränkungen des Raspberry Pi 5:</b> Reine CPU-Inferenz ohne GPU – harte Tempogrenze. Modelle bis ~3B laufen in Chat-Geschwindigkeit; 7–8B nur ~2–3 t/s (praktisch nur Batch, kein flüssiger Chat). Über ~8B unpraktikabel. Kein paralleler Mehrbenutzerbetrieb. Aktiv-Kühler und offizielles 27W-Netzteil Pflicht. USV: Der Pi läuft mit 5V/USB-C – hier genügt statt 230V-USV oft eine Powerbank mit Pass-Through/USV-HAT. Pi-Preise 2026 durch Speicherknappheit erhöht &amp; schwankend.
+  <b>Einschränkungen des Raspberry Pi 5:</b> Reine CPU-Inferenz ohne GPU – harte Tempogrenze. Modelle bis ~3 Mrd. laufen in Chat-Geschwindigkeit; 7–8 Mrd. nur ~2–3 t/s (praktisch nur Batch, kein flüssiger Chat). Über ~8 Mrd. unpraktikabel. Kein paralleler Mehrbenutzerbetrieb. USV: Der Pi läuft mit 5V/USB-C – hier genügt statt 230V-USV oft eine Powerbank mit Pass-Through/USV-HAT. Pi-Preise 2026 durch Speicherknappheit erhöht &amp; schwankend.
+</div>
+
+<div class="note amber">
+  <b>🌡 Kritischer Punkt: Temperatur &amp; Kühlung – vor Inbetriebnahme genau recherchieren.</b> Wenn diese Kleinstrechner ausfallen, dann fast immer durch Hitze. Bei KI-Dauerlast (100 % auf allen vier Kernen) läuft der Pi 5 dauerhaft am Limit – <b>mehr Kühlung bedeutet direkt mehr Lebensdauer</b>. Kernfakten aus aktuellen Tests (2026):
+  <ul style="margin:10px 0 4px;padding-left:20px;line-height:1.7">
+    <li><b>Ohne Kühlung throttelt der Pi 5 bei Volllast innerhalb von ~3 Minuten</b> und bleibt an der Drosselgrenze (~80–85 °C) hängen – für KI-Dauerbetrieb ungeeignet und lebensverkürzend.</li>
+    <li><b>Passivkühlung allein reicht bei KI-Last nicht:</b> Sie hält nur leichte Lasten; unter Dauer-CPU-Last kommt es zu Throttling. Passiv ist nur für Leichtbetrieb/Medienserver okay.</li>
+    <li><b>Aktivkühlung ist Pflicht.</b> Der offizielle <em>Active Cooler</em> (~5 €, PWM-geregelt) hält den SoC unter Volllast rund 20–25 °C unter der Drosselgrenze (~60–63 °C statt 85 °C) – die sinnvolle Grundausstattung für jeden Dauerlast-Pi.</li>
+    <li><b>Für maximale Lebensdauer / hohe Umgebungstemperatur:</b> Ein <em>Tower-Kühler mit Heatpipes</em> (z. B. 52Pi / GeeekPi ICE Tower) ist die thermisch beste Lösung und hält 50–62 °C unter Volllast – kühler = länger haltbar. Nachteil: groß, passt in kein normales Gehäuse. Alternativ Kühler wie Geekworm H505, die zusätzlich RAM &amp; I/O-Chip mitkühlen (~5 °C besser als der Standardkühler).</li>
+    <li><b>Umgebungstemperatur zählt genauso viel wie der Kühler:</b> Ein Aufbau, der im 20-°C-Zimmer unter 70 °C bleibt, kann im warmen Serverschrank (28 °C) throtteln. Immer den <em>wärmsten</em> zu erwartenden Fall einplanen.</li>
+    <li><b>Nur PWM-geregelte Lüfter</b> (4-Pin-Header) verwenden – dauerhaft voll drehende Lüfter sind laut und verschleißen schneller. Fan-Kurve unter Bookworm in <code>/boot/firmware/config.txt</code> einstellen.</li>
+  </ul>
+  <b>Fazit:</b> Für einen KI-Dauerlast-Pi mindestens den offiziellen Active Cooler einplanen, für 24/7-Betrieb bei Wärme lieber einen Tower-Kühler. Vor dem Kauf die aktuell beste Lösung für den konkreten Aufbau (Gehäuse, Standort, Umgebungstemperatur) gezielt recherchieren – hier zu sparen kostet Lebensdauer.
 </div>
 <div class="usecases">
   <div class="uc-card priv"><h4>Typische Einsätze – Privat</h4><ul>
@@ -171,7 +203,7 @@
 </div>
 
 <!-- ===== CLUSTER 1 ===== -->
-<h2 class="cluster klein" id="c1">Cluster 1 – Kleine Modelle <span class="tag klein">≈ 1–9B Parameter · Einstieg, Laptop/kleine GPU</span></h2>
+<h2 class="cluster klein" id="c1">Cluster 1 – Kleine Modelle <span class="tag klein">≈ 1–9 Mrd. Parameter · Einstieg, Laptop/kleine GPU</span></h2>
 <p class="cluster-desc">Laufen teils auf CPU, sonst mit günstiger Neu-GPU. Schnell, sparsam, ideal zum Einstieg. OS: Windows, Linux/Unix &amp; macOS.</p>
 <div class="tbl-scroll">
 <table class="models-tbl">
@@ -199,7 +231,7 @@
 </div>
 
 <!-- ===== CLUSTER 2 ===== -->
-<h2 class="cluster mittel" id="c2">Cluster 2 – Mittlere Modelle <span class="tag mittel">≈ 12–35B Parameter · eine leistungsfähige Neu-GPU</span></h2>
+<h2 class="cluster mittel" id="c2">Cluster 2 – Mittlere Modelle <span class="tag mittel">≈ 12–35 Mrd. Parameter · eine leistungsfähige Neu-GPU</span></h2>
 <p class="cluster-desc">Der „Sweet Spot“: deutlich stärkeres Reasoning und Coding auf einer einzelnen 16–32GB-Neukarte. Hinweis: 24GB als Neuware kaum noch günstig – für 27–32B ist neu die RTX 5090 (32GB) der klare Weg.</p>
 <div class="tbl-scroll">
 <table class="models-tbl">
@@ -230,7 +262,7 @@
 </div>
 
 <!-- ===== CLUSTER 3 ===== -->
-<h2 class="cluster gross" id="c3">Cluster 3 – Große Modelle <span class="tag gross">≈ 70–235B Parameter · Workstation / Multi-GPU / Unified Memory</span></h2>
+<h2 class="cluster gross" id="c3">Cluster 3 – Große Modelle <span class="tag gross">≈ 70–235 Mrd. Parameter · Workstation / Multi-GPU / Unified Memory</span></h2>
 <p class="cluster-desc">Frontier-nahe Qualität lokal. Als Neuware: mehrere RTX 5090 (32GB) oder – deutlich günstiger, leiser &amp; sparsamer – ein Mac Studio mit viel Unified Memory. Gesamtkosten hier mit Enterprise-SSD (Power-Loss-Protection) im Spiegel.</p>
 <div class="tbl-scroll">
 <table class="models-tbl">
@@ -379,6 +411,64 @@
   <a class="back" href="#top">↑ nach oben</a>
 </section>
 
+<!-- ===== SCHLUSSTEXT ===== -->
+<section class="card" id="ausblick" style="margin-top:26px">
+  <h2>Vom anonymen Cloud-Dienst zum persönlichen KI-Begleiter</h2>
+  <p>Wer heute Cloud-KI nutzt, tauscht Bequemlichkeit gegen Distanz. Die Modelle sind mächtig, doch sie bleiben Fremde: Nach jedem Gespräch ist alles vergessen, die eigenen Daten liegen auf fremden Servern, und was mit ihnen geschieht, entzieht sich der Kontrolle. Man spricht mit einem brillanten Unbekannten, der einen nie wirklich kennenlernt.</p>
+  <p>Die Umstellung auf eine eigene, lokale Lösung dreht dieses Verhältnis um. Statt anonymer Rechenzentren steht ein System im eigenen Haus, das ausschließlich einem selbst dient. Nichts verlässt das private Netz. Doch der eigentliche Gewinn ist nicht nur Datenschutz – es ist Nähe. Eine lokale KI, gefüttert mit den eigenen Notizen, Projekten und Markdown-Dateien, wächst über die Zeit zu einem Gedächtnis heran, das den eigenen Kontext versteht: die laufenden Vorhaben, den Schreibstil, die wiederkehrenden Fragen.</p>
+  <p>Was als technische Entscheidung beginnt, wird so zu einer Veränderung der Arbeitsweise. Man pflegt sein Wissen bewusster, weil es zur gemeinsamen Grundlage wird. Der Assistent lernt nicht anonym aus Millionen Fremder, sondern konkret aus dem eigenen Leben – und bleibt dabei vollständig in der eigenen Hand.</p>
+  <p>Es ist der Unterschied zwischen einem Werkzeug, das man benutzt, und einem Begleiter, der mit einem wächst: privat, dauerhaft und wirklich der eigene.</p>
+  <a class="back" href="#top">↑ nach oben</a>
+</section>
+
+<!-- ===== GLOSSAR ===== -->
+<section class="card" id="glossar" style="margin-top:26px">
+  <h2>Glossar</h2>
+  <p style="color:var(--muted);font-size:.86rem;margin-top:-4px">Kurzerklärungen der wichtigsten Begriffe dieser Aufstellung – bewusst knapp und alltagsnah.</p>
+  <div class="tbl-scroll" style="margin-top:14px">
+  <table style="min-width:720px">
+  <thead><tr><th>Begriff</th><th>Bedeutung</th></tr></thead>
+  <tbody>
+  <tr><td class="model-name">LLM</td><td>„Large Language Model“ – großes Sprachmodell, das Text versteht und erzeugt (z. B. Llama, Qwen, Mistral).</td></tr>
+  <tr><td class="model-name">Open-Weight</td><td>Modell, dessen trainierte Gewichte frei herunterladbar sind – Voraussetzung für lokalen Betrieb. Nicht zwingend vollständig „Open Source“.</td></tr>
+  <tr><td class="model-name">Onsite / lokal</td><td>Betrieb vollständig auf eigener Hardware im Haus, ohne Datenübertragung an einen Cloud-Anbieter.</td></tr>
+  <tr><td class="model-name">Parameter (z. B. 8B)</td><td>Zahl der „Stellschrauben“ eines Modells. Das „B“ in Modellnamen steht für das englische <em>billion</em> = <b>Milliarde</b> (8B = 8 Mrd. Parameter); es ist Teil des offiziellen Modellnamens und bleibt daher so stehen. Grobe Faustregel: mehr Parameter = fähiger, aber speicher- &amp; rechenhungriger.</td></tr>
+  <tr><td class="model-name">Token</td><td>Kleinste Texteinheit, die ein Modell verarbeitet (etwa Wortteil). „Tokens/Sekunde“ (t/s) misst die Ausgabegeschwindigkeit.</td></tr>
+  <tr><td class="model-name">Quantisierung (Q4)</td><td>Komprimierung der Modellgewichte (z. B. auf 4 Bit), um Speicherbedarf zu senken – etwas Qualität gegen viel weniger VRAM-Bedarf. Q4 ist der gängige Kompromiss.</td></tr>
+  <tr><td class="model-name">VRAM</td><td>Grafikkarten-Speicher. Das Modell muss (quantisiert) hineinpassen – die wichtigste Kenngröße bei der GPU-Wahl.</td></tr>
+  <tr><td class="model-name">Unified Memory</td><td>Bei Apple-Silicon-Macs gemeinsamer Speicher für CPU &amp; GPU. Ersetzt separaten VRAM und erlaubt große Modelle bei geringem Stromverbrauch.</td></tr>
+  <tr><td class="model-name">GPU</td><td>Grafikkarte; übernimmt die eigentliche KI-Rechenlast. Bestimmt maßgeblich Tempo und mögliche Modellgröße.</td></tr>
+  <tr><td class="model-name">CPU</td><td>Hauptprozessor; bei GPU-Betrieb v. a. für Datenladen &amp; Orchestrierung zuständig. Bei Multi-GPU zählen die PCIe-Lanes.</td></tr>
+  <tr><td class="model-name">MoE</td><td>„Mixture of Experts“ – Modellbauart, bei der pro Anfrage nur ein Teil der Parameter aktiv ist (z. B. 235B gesamt, 22B aktiv). Spart Rechenleistung.</td></tr>
+  <tr><td class="model-name">RAG</td><td>„Retrieval-Augmented Generation“ – das Modell zieht relevante eigene Dokumente heran, statt nur aus dem Training zu antworten. Basis für Wissens-Bots.</td></tr>
+  <tr><td class="model-name">Vektor-DB</td><td>Spezialdatenbank (z. B. Qdrant), die Texte als „Bedeutungspunkte“ speichert und ähnliche Inhalte findet – das Rückgrat von RAG.</td></tr>
+  <tr><td class="model-name">Embedding</td><td>Umwandlung von Text in Zahlenvektoren, die Bedeutung abbilden – nötig, damit die Vektor-DB Ähnlichkeit berechnen kann.</td></tr>
+  <tr><td class="model-name">Inferenz</td><td>Der eigentliche „Denk-“/Antwortvorgang eines fertigen Modells (im Gegensatz zum Training).</td></tr>
+  <tr><td class="model-name">Runtime / Serving</td><td>Software, die das Modell lädt und als Dienst bereitstellt (z. B. Ollama, vLLM).</td></tr>
+  <tr><td class="model-name">Ollama</td><td>Beliebte, einfache Runtime für lokale Modelle; stellt eine OpenAI-kompatible Schnittstelle bereit (Port 11434).</td></tr>
+  <tr><td class="model-name">vLLM</td><td>Hochleistungs-Runtime für stärkere Auslastung/Multi-GPU; anspruchsvoller einzurichten als Ollama.</td></tr>
+  <tr><td class="model-name">OpenAI-kompatible API</td><td>Verbreitetes Schnittstellen-Format. Weil viele Werkzeuge es „sprechen“, lässt sich das Modell austauschen, ohne die Anwendung umzubauen.</td></tr>
+  <tr><td class="model-name">Endpoint</td><td>Die Netzwerk-Adresse, unter der die Modell-Schnittstelle erreichbar ist (z. B. <code>http://…:11434</code>).</td></tr>
+  <tr><td class="model-name">Gateway (LiteLLM)</td><td>Zwischenschicht, die mehrere Modelle hinter einem Zugang bündelt – mit Nutzer-Limits, Budgets &amp; Protokollierung.</td></tr>
+  <tr><td class="model-name">n8n</td><td>Quelloffenes Automatisierungswerkzeug („Wenn-dann“-Abläufe), das Modelle in Arbeitsabläufe einbindet.</td></tr>
+  <tr><td class="model-name">Hermes</td><td>Agent-Gateway (Nous Research), das einen KI-Assistenten über viele Kanäle (WhatsApp, Telegram, Signal, E-Mail, Matrix …) erreichbar macht.</td></tr>
+  <tr><td class="model-name">OpenCode</td><td>Quelloffener Terminal-/Coding-Agent, der auf einen lokalen Endpoint zeigen und Coding- sowie Admin-Aufgaben übernehmen kann.</td></tr>
+  <tr><td class="model-name">Open WebUI</td><td>Selbst gehostete Weboberfläche für lokale Modelle, inkl. RAG &amp; Mehrbenutzer; auch als Handy-Web-App nutzbar.</td></tr>
+  <tr><td class="model-name">VPN-Tunnel</td><td>Verschlüsselte Direktverbindung ins eigene Netz. Der Modell-Zugriff von unterwegs läuft ausschließlich darüber – nichts ist öffentlich erreichbar.</td></tr>
+  <tr><td class="model-name">WireGuard / Tailscale</td><td>Modernes, schlankes VPN-Protokoll (WireGuard) bzw. besonders einfach einzurichtender Dienst darauf (Tailscale).</td></tr>
+  <tr><td class="model-name">RAID-1 (Spiegel)</td><td>Zwei SSDs mit identischem Inhalt; fällt eine aus, läuft es weiter. Schutz vor Plattenausfall – aber <em>kein</em> Ersatz für ein Backup.</td></tr>
+  <tr><td class="model-name">Power-Loss-Protection</td><td>Schutzfunktion hochwertiger („Enterprise“-)SSDs, die bei Stromausfall gerade geschriebene Daten sichert.</td></tr>
+  <tr><td class="model-name">USV</td><td>Unterbrechungsfreie Stromversorgung – Akku-Puffer, der bei Stromausfall ein sauberes Herunterfahren (oder Weiterlaufen) ermöglicht.</td></tr>
+  <tr><td class="model-name">Markdown (.md)</td><td>Einfaches Text-Format mit leichter Formatierung; versionierbar, langlebig, ideal als Wissensquelle für RAG.</td></tr>
+  <tr><td class="model-name">Front-Matter</td><td>Metadaten-Kopf (Tags, Datum) am Anfang einer Markdown-Datei – verbessert Auffindbarkeit &amp; Retrieval-Qualität.</td></tr>
+  <tr><td class="model-name">Benchmarking</td><td>Systematisches Messen &amp; Vergleichen (hier: von Modell-Hardware-Kombinationen anhand echter Aufgaben). In dieser Aufstellung bewusst als offene Lücke benannt.</td></tr>
+  <tr><td class="model-name">ISV-Zertifizierung</td><td>Freigabe eines Rechners durch Softwarehersteller („Independent Software Vendor“) – Qualitätssignal bei Workstations (Dell/Lenovo).</td></tr>
+  </tbody>
+  </table>
+  </div>
+  <a class="back" href="#top">↑ nach oben</a>
+</section>
+
 <!-- ===== DISCLAIMER + FOOTER ===== -->
 <div class="note amber" style="margin-top:24px">
   <strong>Hinweise:</strong> <b>Alle Preise = Neuware</b> (keine Gebrauchtware). Es gibt <b>kein „Phi-5“</b> – aktuellste Phi-Generation ist Phi-4 bzw. Phi-4-reasoning-vision-15B (März 2026); für sehr kleine Systeme Phi-3.5 Mini. VRAM/RAM-Angaben für gängige <code>Q4</code>-Quantisierung. „GPU-Preis (neu, nackt)“ = reine Grafikkarte. <b>Gesamtkosten System</b> = kompletter Rechner inkl. Mainboard, CPU, RAM, Gehäuse, Kühlung, <b>gespiegeltem High-End-SSD-Failover (2× NVMe im RAID-1; großer Cluster mit Power-Loss-Protection)</b> und <b>USV</b> (ab 300-W-Netzteil eingerechnet). Beim Mac ersetzt Unified Memory GPU-VRAM &amp; System-RAM. Einstieg über <code>Ollama</code> oder <code>LM Studio</code> (kostenlos). Alle Beträge gerundete Richtwerte, Momentaufnahme, ohne Gewähr.
@@ -389,6 +479,55 @@
   <p style="margin-top:10px">Informative Orientierungshilfe, keine Kauf-, Steuer- oder Rechtsberatung im Einzelfall.</p>
 </footer>
 
+<div class="note red" style="margin-top:24px">
+  <strong>Haftungsausschluss.</strong> Zusammenstellung: <b>Frank Arendt, Bretten</b>. Ich übernehme keine Haftung für irgendwelche Informationen in diesem Dokument. Alle Angaben sind ohne Gewähr, können Fehler enthalten und jederzeit veraltet sein. Die Nutzerinnen und Nutzer entscheiden allein und in eigener Verantwortung, was auf Basis dieser Informationen getan wird. Jegliche Haftung für Schäden oder Folgen, die aus der Verwendung dieser Inhalte entstehen, ist ausgeschlossen.
 </div>
+
+<section class="card" id="impressum" style="margin-top:24px">
+  <h2>Impressum</h2>
+  <p style="color:var(--muted);font-size:.84rem;margin-top:-4px">Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz). Hinweis: Für rein private, nicht-kommerzielle Angebote besteht in der Regel keine Impressumspflicht; die folgenden Angaben erfolgen freiwillig.</p>
+  <p style="font-size:.9rem;line-height:1.8;margin-top:14px">
+    <b>Verantwortlich für den Inhalt:</b><br>
+    Frank Arendt<br>
+    Dr.-Alfred-Neff-Str. 1<br>
+    75015 Bretten<br>
+    Deutschland
+  </p>
+  <p style="font-size:.9rem;line-height:1.8">
+    <b>Kontakt:</b><br>
+    E-Mail: <span id="eaddr" data-u="frank" data-d="arendt" data-t="de" style="color:var(--klein)">[E-Mail wird angezeigt, sobald JavaScript aktiv ist]</span><noscript><br><span class="ref">(E-Mail: frank – bei – arendt – punkt – de)</span></noscript>
+  </p>
+  <p style="font-size:.84rem;color:var(--muted);line-height:1.7;margin-top:14px">
+    <b>Verantwortlich i. S. d. § 18 Abs. 2 MStV:</b> Frank Arendt, Anschrift wie oben.<br>
+    <b>Charakter des Angebots:</b> Privates, nicht-kommerzielles Informationsdokument. Keine Gewinnerzielungsabsicht, keine Werbung, kein Verkauf.<br>
+    <b>Streitschlichtung:</b> Zur Teilnahme an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle bin ich nicht verpflichtet und nicht bereit.
+  </p>
+  <div class="note amber" style="margin-top:12px;font-size:.82rem">
+    <b>Vor Veröffentlichung ausfüllen:</b> Die mit <em>[…]</em> markierten Felder durch echte Angaben ersetzen. Ein Impressum ist nur „belastbar“, wenn die Daten vollständig, korrekt und aktuell sind. Bei geschäftlicher Nutzung kämen weitere Pflichtangaben hinzu (z. B. USt-IdNr., Register, ggf. Aufsichtsbehörde/Berufsangaben) – dann fachlich prüfen lassen.
+  </div>
+  <a class="back" href="#top">↑ nach oben</a>
+</section>
+
+</div>
+<script>
+/* E-Mail-Adresse erst im Browser zur Laufzeit zusammensetzen –
+   erschwert automatisches Auslesen (Harvesting) durch Bots. */
+(function () {
+  var el = document.getElementById('eaddr');
+  if (!el) return;
+  var u = el.getAttribute('data-u');
+  var d = el.getAttribute('data-d');
+  var t = el.getAttribute('data-t');
+  var at = String.fromCharCode(64);   // @
+  var dot = String.fromCharCode(46);  // .
+  var addr = u + at + d + dot + t;
+  var a = document.createElement('a');
+  a.href = 'mai' + 'lto:' + addr;
+  a.textContent = addr;
+  a.style.color = 'var(--klein)';
+  el.textContent = '';
+  el.appendChild(a);
+})();
+</script>
 </body>
 </html>
