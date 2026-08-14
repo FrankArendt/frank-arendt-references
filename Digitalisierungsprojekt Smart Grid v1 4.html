@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anforderungsdokument – Smart Grid Eigenheim v1.4</title>
+<style>
+  :root{
+    --ink:#1f2937; --muted:#4b5563; --line:#e5e7eb;
+    --brand:#1f6feb; --brand-dark:#0b3d91; --rail:#1f6feb;
+    --panel:#f8fafc; --code-bg:#f4f6f8; --code:#334155;
+    --hoch:#c0392b; --mittel:#e08a00; --niedrig:#2e9e5b;
+  }
+  *{box-sizing:border-box}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink); line-height:1.55; margin:0; background:#fff; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:840px; margin:0 auto; padding:44px 28px 90px}
+  h1{color:var(--brand-dark); font-size:1.9rem; line-height:1.2; margin:0 0 .3em}
+  .meta{color:var(--muted); font-size:.92rem; margin:.15em 0}
+  .meta b{color:var(--ink)}
+  .card{
+    border:1px solid var(--line); border-left:5px solid var(--rail);
+    border-radius:10px; padding:24px 30px; margin:26px 0;
+    box-shadow:0 1px 2px rgba(0,0,0,.03);
+  }
+  h2{color:var(--brand-dark); font-size:1.4rem; margin:.1em 0 .2em}
+  h3{color:var(--brand); font-size:1.05rem; margin:1.5em 0 .5em}
+  h4{color:var(--brand); font-size:.95rem; margin:1.2em 0 .4em}
+  .rule{height:1px; background:var(--line); margin:.6em 0 1.1em}
+  p{margin:.7em 0}
+  ul,ol{margin:.6em 0 .6em 1.2em; padding:0}
+  li{margin:.35em 0}
+  .note{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:13px 18px; margin:1.1em 0}
+  .note strong{color:var(--brand-dark)}
+  table{width:100%; border-collapse:collapse; margin:1em 0; font-size:.9rem}
+  th,td{border:1px solid var(--line); padding:8px 11px; text-align:left; vertical-align:top}
+  th{color:var(--brand); font-weight:600; background:#fbfdff}
+  code{font-family:ui-monospace,Menlo,Consolas,monospace; background:var(--code-bg); color:var(--code); padding:1px 5px; border-radius:4px; font-size:.85em}
+  pre{background:var(--code-bg); color:var(--code); border:1px solid var(--line); border-radius:8px; padding:13px 15px; overflow-x:auto; font-size:.8rem; font-family:ui-monospace,Menlo,Consolas,monospace; line-height:1.45}
+  .id{color:var(--brand); font-weight:600; white-space:nowrap}
+  .pri-hoch{color:var(--hoch); font-weight:700}
+  .pri-mittel{color:var(--mittel); font-weight:700}
+  .pri-niedrig{color:var(--niedrig); font-weight:700}
+  ol.toc{counter-reset:toc; list-style:none; margin-left:0}
+  ol.toc li{counter-increment:toc; padding:3px 0}
+  ol.toc li::before{content:counter(toc) ". "; color:var(--brand); font-weight:600}
+  .new-badge{display:inline-block; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:#fff; background:var(--niedrig); border-radius:4px; padding:1px 7px; margin-left:8px; vertical-align:middle}
+  .steps{display:flex; flex-wrap:wrap; gap:10px; margin:1em 0}
+  .step{flex:1 1 150px; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:12px 14px; font-size:.88rem}
+  .step b{color:var(--brand)}
+  .foot{color:#9aa4b2; font-size:.82rem; text-align:center; margin-top:40px; line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Anforderungsdokument – Digitalisierungsprojekt „Smart Grid Eigenheim“</h1>
+  <p class="meta"><b>Auftraggeber / Projektleitung:</b> Frank Arendt</p>
+  <p class="meta"><b>Dokumentversion:</b> 1.4 &nbsp;|&nbsp; <b>Status:</b> Entwurf</p>
+  <p class="meta"><b>Änderung ggü. 1.3:</b> Neues Kapitel 5.6 – Geräteschnittstelle Wallbox (Pulsar Plus), Anforderungen WB-01…WB-10 inkl. API-Optionsprüfung und Risikobewertung</p>
+  <p class="meta"><b>Änderung 1.2 → 1.3:</b> Neues Kapitel 5.5 – Fahrzeugschnittstelle Renault Zoe, Anforderungen FZ-01…FZ-10 inkl. Risikobewertung</p>
+  <p class="meta"><b>Änderung 1.1 → 1.2:</b> Neues Kapitel 5.4 – Geräteschnittstelle Wechselrichter (RCT Power), Anforderungen WR-01…WR-09</p>
+  <p class="meta"><b>Änderung 1.0 → 1.1:</b> Kapitel 5.1 vollständig überarbeitet (Anforderungen WA-01…WA-10)</p>
+  <p class="meta"><b>Themenbereich:</b> Energiemanagementsystem (EMS) mit REST-API-Anbindung &amp; iOS-Steuerungs-App</p>
+
+  <div class="card">
+    <h2>Inhaltsverzeichnis</h2>
+    <div class="rule"></div>
+    <ol class="toc">
+      <li>Zielsetzung und Projektumfang</li>
+      <li>Anlagenkontext (Ist-Zustand)</li>
+      <li>Energiebilanz und Betriebsstrategie</li>
+      <li>Funktionale Anforderungen</li>
+      <li>REST-API-Anforderungen</li>
+      <li>Steuerungslogik &amp; Optimierungsregeln</li>
+      <li>iPhone-App (Steuerung &amp; Information)</li>
+      <li>Nicht-funktionale Anforderungen</li>
+      <li>Rechtliche &amp; regulatorische Anforderungen</li>
+      <li>Systemarchitektur</li>
+      <li>Abnahmekriterien &amp; Meilensteine</li>
+    </ol>
+    <p style="font-size:.85rem;color:var(--muted)">Kapitel 5 umfasst: 5.1 Wetter/PV-Prognose · 5.2 Strombörse · 5.3 Interne EMS-API · 5.4 Wechselrichter · 5.5 Fahrzeug (Zoe) · <b>5.6 Wallbox (Pulsar Plus) — neu</b></p>
+  </div>
+
+  <div class="card">
+    <h2>1. Zielsetzung und Projektumfang</h2>
+    <div class="rule"></div>
+    <p>Ziel des Projekts ist die Realisierung eines intelligenten, digital vernetzten Energiemanagementsystems (EMS) für einen typischen deutschen Haushalt. Das System soll <b>maximalen Eigenverbrauch</b> der PV-Erzeugung erreichen und gleichzeitig <b>netzdienlich</b> (§ 14a EnWG) sowie <b>kostenoptimiert</b> auf Basis dynamischer Börsenstrompreise arbeiten.</p>
+    <h4>Primärziele</h4>
+    <ul>
+      <li>Maximierung der Autarkie (Zielwert 75–90 % im Jahresmittel)</li>
+      <li>Prognosebasierte Steuerung von Speicher, Wärmepumpe und Wallbox</li>
+      <li>Integration einer REST-API für Wettervorhersage und Strombörsenpreise</li>
+      <li>Bedienung &amp; Monitoring über eine native iPhone-App</li>
+      <li>Netzdienliches Verhalten und Nutzung reduzierter Netzentgelte</li>
+    </ul>
+    <p><b>Im Umfang enthalten:</b> EMS-Kernlogik, API-Anbindungen, Datenpersistenz, iOS-App, Sicherheitskonzept.<br>
+    <b>Nicht im Umfang:</b> Hardware-Installation der PV/Speicher, elektrische Montagearbeiten, Netzanschlussgenehmigung.</p>
+  </div>
+
+  <div class="card">
+    <h2>2. Anlagenkontext (Ist-Zustand)</h2>
+    <div class="rule"></div>
+    <table>
+      <thead><tr><th>Komponente</th><th>Spezifikation</th><th>Steuerbarkeit</th></tr></thead>
+      <tbody>
+        <tr><td>PV-Anlage</td><td>20 kWp</td><td>Erzeugungsprognose, Drosselung</td></tr>
+        <tr><td>Batteriespeicher</td><td>20 kWh nutzbar</td><td>Lade-/Entladesteuerung, SoC-Ziele</td></tr>
+        <tr><td>Wärmepumpe</td><td>ca. 3.000–6.000 kWh/Jahr</td><td>SG-Ready / Freigabe / Sollwertverschiebung</td></tr>
+        <tr><td>E-Fahrzeug</td><td>Renault Zoe, ~52 kWh nutzbar, AC 11/22 kW</td><td>Wallbox: 1-/3-phasig, 1,4–22 kW</td></tr>
+        <tr><td>Wallbox</td><td>Wallbox Pulsar Plus, AC bis 22 kW, OCPP 1.6j</td><td>Ladefreigabe, Stromsollwert, Phasenumschaltung (vgl. 5.6)</td></tr>
+        <tr><td>Netzanschluss</td><td>Haushalt, dynamischer Tarif</td><td>Bezug/Einspeisung, § 14a-Steuerung</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>3. Energiebilanz und Betriebsstrategie</h2>
+    <div class="rule"></div>
+    <table>
+      <thead><tr><th>Bereich</th><th>Größenordnung / Jahr</th></tr></thead>
+      <tbody>
+        <tr><td>PV-Erzeugung 20 kWp</td><td>ca. 18.000–22.000 kWh</td></tr>
+        <tr><td>Haushaltsstrom</td><td>ca. 3.000–5.000 kWh</td></tr>
+        <tr><td>Wärmepumpe</td><td>ca. 3.000–6.000 kWh</td></tr>
+        <tr><td>Zoe (10–15.000 km)</td><td>ca. 1.700–2.600 kWh</td></tr>
+        <tr><td>Gesamtverbrauch</td><td>ca. 8.000–13.000 kWh</td></tr>
+        <tr><td>Erwartete Autarkie</td><td>75–90 %</td></tr>
+      </tbody>
+    </table>
+    <h4>Betriebsstrategie (Priorisierung des PV-Überschusses)</h4>
+    <div class="steps">
+      <div class="step"><b>1.</b> Haus direkt aus PV</div>
+      <div class="step"><b>2.</b> Akku bis 60–80 % laden</div>
+      <div class="step"><b>3.</b> Wärmepumpe bei Überschuss (Warmwasser mittags)</div>
+      <div class="step"><b>4.</b> Zoe mit echtem Überschuss</div>
+      <div class="step"><b>5.</b> Hausakku für Abend/Nacht reservieren</div>
+    </div>
+    <div class="note"><strong>Kernregel:</strong> „Akku bis Mittag nicht voll laden, sondern Kapazität für PV-Spitzen freihalten. Wärmepumpe und Zoe bevorzugt zwischen 10 und 16 Uhr betreiben.“</div>
+  </div>
+
+  <div class="card">
+    <h2>4. Funktionale Anforderungen</h2>
+    <div class="rule"></div>
+    <table>
+      <thead><tr><th>ID</th><th>Anforderung</th><th>Priorität</th></tr></thead>
+      <tbody>
+        <tr><td class="id">FA-01</td><td>Das EMS erfasst kontinuierlich PV-Leistung, Hausverbrauch, Batterie-SoC, WP-Zustand und Wallbox-Status.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">FA-02</td><td>Das EMS ruft eine PV-Erzeugungsprognose auf Basis externer Wetterdaten ab.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">FA-03</td><td>Das EMS ruft dynamische Börsenstrompreise (Day-Ahead) stundenweise ab.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">FA-04</td><td>Das EMS steuert Batterieladung/-entladung nach Prognose- und Preisdaten.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">FA-05</td><td>Das EMS gibt die Wärmepumpe bei PV-Überschuss frei bzw. verschiebt Warmwasserbereitung in Überschusszeiten.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">FA-06</td><td>Das EMS lädt die Zoe überschussgeführt und schaltet zwischen 1- und 3-phasig abhängig von PV-Leistung um.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">FA-07</td><td>Der Nutzer kann Mindest-Ladeziele (z. B. Zoe bis 07:00 auf 80 %) definieren, die Vorrang vor Überschussoptimierung haben.</td><td class="pri-mittel">Mittel</td></tr>
+        <tr><td class="id">FA-08</td><td>Das EMS berücksichtigt § 14a-Steuerbefehle des Netzbetreibers (Leistungsreduzierung).</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">FA-09</td><td>Das EMS protokolliert alle Schaltvorgänge und Energieflüsse für Auswertungen.</td><td class="pri-mittel">Mittel</td></tr>
+        <tr><td class="id">FA-10</td><td>Manuelle Übersteuerung (Boost/Pause) einzelner Verbraucher durch den Nutzer.</td><td class="pri-mittel">Mittel</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>5. REST-API-Anforderungen</h2>
+    <div class="rule"></div>
+
+    <h3>5.1 Externe API – Wettervorhersage und PV-Ertragsprognose</h3>
+    <p>Die PV-Erzeugungsprognose ist die zentrale Eingangsgröße der Optimierungslogik (vgl. FA-02, SL-02). Ohne belastbare 48-h-Prognose kann weder die Ladeverzögerung des Hausakkus noch die Verschiebung von Wärmepumpe und Wallbox in das Überschussfenster geplant werden. Das EMS muss daher eine stundenscharfe Ertragsprognose für die konkret parametrierte Anlage (20 kWp, definierte Neigung und Ausrichtung) bereitstellen.</p>
+
+    <h4>5.1.1 Auswahl der Datenquelle</h4>
+    <p>Es werden ausschließlich Dienste eingesetzt, die in einem kostenfreien Tarif für den Privatgebrauch nutzbar sind. Bewertet wurden drei Kandidaten:</p>
+    <table>
+      <thead><tr><th>Dienst</th><th>Kostenfreier Umfang</th><th>Horizont</th><th>Ausgabegröße</th><th>Bewertung</th></tr></thead>
+      <tbody>
+        <tr><td>Forecast.Solar (Public/Personal)</td><td>Public: ohne Registrierung, ca. 12 Abrufe/h, IP-basiert. Personal: kostenfrei mit API-Key</td><td>Public 24 h, Personal 48 h</td><td>Wh je Stunde, anlagenbezogen</td><td>Liefert Ertrag fertig berechnet; kein eigenes Anlagenmodell nötig. Enges Abruflimit.</td></tr>
+        <tr><td>Open-Meteo</td><td>kostenfrei ohne API-Key für nicht-kommerzielle Nutzung, praktisch unbegrenzte Abrufe</td><td>bis 16 Tage</td><td>Einstrahlung (GHI, DNI, DHI, GTI) – kein Ertrag</td><td>Höchste Flexibilität, erfordert eigene Ertragsberechnung im EMS.</td></tr>
+        <tr><td>Solcast (Hobbyist)</td><td>kostenfrei nach Registrierung, 2 Anlagen, begrenzte Abrufe/Tag</td><td>bis 14 Tage</td><td>kW je Zeitschritt, satellitengestützt</td><td>Beste Datenqualität, aber Abruflimit für 60-min-Takt zu knapp.</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>Festlegung:</strong> Das EMS implementiert eine <b>zweigleisige Prognose</b>. Primärquelle ist <b>Open-Meteo</b> (unbegrenzte Abrufe, eigene Ertragsrechnung), Sekundärquelle ist <b>Forecast.Solar</b> als unabhängige Vergleichs- und Plausibilisierungsprognose. Die Architektur ist so auszulegen, dass eine Quelle über Konfiguration austauschbar ist (Provider-Abstraktion).</div>
+
+    <h4>5.1.2 Anlagenparametrierung</h4>
+    <p>Die Prognoseanfrage erfolgt auf Basis eines fest hinterlegten Anlagenprofils. Bei Anlagen mit mehreren Teilflächen (z. B. Ost-/West-Dach) ist je Teilfläche eine eigene Anfrage zu stellen und die Ergebnisse sind zu summieren.</p>
+    <table>
+      <thead><tr><th>Parameter</th><th>Bedeutung</th><th>Beispielwert</th></tr></thead>
+      <tbody>
+        <tr><td>Breiten-/Längengrad</td><td>Standort der Anlage</td><td>53,55 / 9,99</td></tr>
+        <tr><td>Neigung (tilt)</td><td>Modulneigung gegen die Horizontale in Grad</td><td>35°</td></tr>
+        <tr><td>Azimut</td><td>Ausrichtung; Konvention der API beachten (Süd = 0° oder 180°)</td><td>Süd</td></tr>
+        <tr><td>Peak-Leistung</td><td>installierte Modulleistung je Teilfläche</td><td>20 kWp</td></tr>
+        <tr><td>Performance Ratio</td><td>Systemwirkungsgrad (Wechselrichter, Leitungen, Verschmutzung)</td><td>0,80–0,85</td></tr>
+        <tr><td>Verschattungsprofil</td><td>optionale horizontabhängige Korrektur</td><td>anlagenspezifisch</td></tr>
+      </tbody>
+    </table>
+
+    <h4>5.1.3 Ertragsberechnung im EMS</h4>
+    <p>Bei Nutzung einer reinen Einstrahlungsquelle rechnet das EMS den Ertrag je Stunde selbst. Grundlage ist die geneigte Globalstrahlung (Global Tilted Irradiance, GTI) in W/m²:</p>
+<pre>P_AC   = GTI / 1000 · P_peak · PR · f_temp
+f_temp = 1 + γ · (T_Zelle − 25 °C),  γ ≈ −0,004 /K
+T_Zelle ≈ T_Luft + GTI / 800 · (NOCT − 20 °C)</pre>
+    <p>Der Temperaturkorrekturfaktor ist relevant, weil an heißen Sommertagen trotz maximaler Einstrahlung Ertragseinbußen im Bereich von 8–12 % auftreten. Eine Prognose ohne Temperaturterm überschätzt die Mittagsspitze systematisch und führt zu einer zu späten Akku-Ladefreigabe.</p>
+
+    <h4>5.1.4 Anforderungen</h4>
+    <table>
+      <thead><tr><th>ID</th><th>Anforderung</th><th>Priorität</th></tr></thead>
+      <tbody>
+        <tr><td class="id">WA-01</td><td>Das EMS ruft mindestens stündlich eine PV-Ertragsprognose über 48 h in stündlicher Auflösung ab.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">WA-02</td><td>Die Prognose wird anlagenspezifisch (Standort, Neigung, Azimut, kWp, PR) parametriert; mehrere Teilflächen werden getrennt angefragt und summiert.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">WA-03</td><td>Bei Nutzung einer Einstrahlungsquelle erfolgt die Ertragsumrechnung inkl. Temperaturkorrektur nach 5.1.3.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">WA-04</td><td>Zwei unabhängige Quellen werden abgefragt; Abweichungen &gt; 25 % im Tagessummenwert werden protokolliert und lösen eine Warnung aus.</td><td class="pri-mittel">Mittel</td></tr>
+        <tr><td class="id">WA-05</td><td>Die letzte gültige Prognose wird persistent gespeichert und bei Ausfall der externen API als Fallback genutzt (max. 24 h Alter).</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">WA-06</td><td>Ist keine gültige Prognose verfügbar, schaltet das EMS auf eine konservative Regelbasis um (Akku-Ladung ohne Verzögerung, keine spekulative Lastverschiebung).</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">WA-07</td><td>Abrufe werden mit Backoff wiederholt (z. B. 1/5/15 min); das Abruflimit der Quelle wird eingehalten und clientseitig überwacht.</td><td class="pri-mittel">Mittel</td></tr>
+        <tr><td class="id">WA-08</td><td>Prognose- und Ist-Werte werden dauerhaft gespeichert, um die Prognosegüte auszuwerten und den PR-Wert nachzuführen.</td><td class="pri-mittel">Mittel</td></tr>
+        <tr><td class="id">WA-09</td><td>Bei Änderung der Anlagenkonfiguration sind die Parameter ohne Codeänderung anpassbar (Konfigurationsdatei / App).</td><td class="pri-niedrig">Niedrig</td></tr>
+        <tr><td class="id">WA-10</td><td>Die Prognosegüte wird gegen das Abnahmekriterium (Tagesabweichung ≤ 15 %) fortlaufend gemessen.</td><td class="pri-mittel">Mittel</td></tr>
+      </tbody>
+    </table>
+
+    <h4>5.1.6 Normalisierte interne Repräsentation</h4>
+<pre>GET /api/v1/forecast/pv?hours=48   Response 200 (JSON):
+{ "plant": { "kwp": 20, "tilt": 35, "azimuth": "S" },
+  "source": "open-meteo", "fallback_used": false,
+  "generated_at": "2026-07-22T09:05:00+02:00", "confidence": 0.86,
+  "forecast": [
+    { "time": "2026-07-22T10:00", "gti": 612, "temp": 21.4, "p_ac_kw": 9.6, "energy_kwh": 9.6 },
+    { "time": "2026-07-22T11:00", "gti": 731, "temp": 23.1, "p_ac_kw": 11.4, "energy_kwh": 11.4 } ],
+  "daily_totals": [ { "date": "2026-07-22", "energy_kwh": 94.3 },
+                    { "date": "2026-07-23", "energy_kwh": 71.8 } ] }</pre>
+    <p>Das Feld <code>confidence</code> wird aus der Abweichung der beiden Quellen abgeleitet: Bei niedriger Konfidenz wird die Ladeverzögerung des Hausakkus (SL-02) abgeschwächt.</p>
+
+    <h3>5.2 Externe API – Strombörse / Preisentwicklung</h3>
+    <table>
+      <thead><tr><th>Aspekt</th><th>Anforderung</th></tr></thead>
+      <tbody>
+        <tr><td>Datenquelle</td><td>Day-Ahead-Preise (z. B. ENTSO-E, EPEX über aWATTar/Tibber-API)</td></tr>
+        <tr><td>Parameter</td><td>Stundenpreise €/kWh, 24–36 h im Voraus, inkl. Netzentgelte/Steuern optional</td></tr>
+        <tr><td>Abrufintervall</td><td>täglich nach Preisveröffentlichung (ca. 14:00 Uhr) + Retry-Logik</td></tr>
+        <tr><td>Zweck</td><td>Kostenoptimiertes Laden/Entladen, Lastverschiebung in Niedrigpreisfenster</td></tr>
+      </tbody>
+    </table>
+<pre>GET /api/v1/market/prices?zone=DE-LU&date=2026-06-01   Response 200 (JSON):
+{ "currency": "EUR", "unit": "kWh", "prices": [
+  { "time": "2026-06-01T02:00", "total": 0.089 },
+  { "time": "2026-06-01T12:00", "total": 0.045 },
+  { "time": "2026-06-01T19:00", "total": 0.312 } ] }</pre>
+
+    <h3>5.3 Interne EMS-API (für App-Kommunikation)</h3>
+    <table>
+      <thead><tr><th>Endpoint</th><th>Methode</th><th>Beschreibung</th></tr></thead>
+      <tbody>
+        <tr><td><code>/api/v1/status</code></td><td>GET</td><td>Aktuelle Leistungswerte, SoC, Autarkiegrad</td></tr>
+        <tr><td><code>/api/v1/forecast</code></td><td>GET</td><td>PV- &amp; Preisprognose aufbereitet</td></tr>
+        <tr><td><code>/api/v1/battery</code></td><td>PUT</td><td>SoC-Zielwerte, Lademodus setzen</td></tr>
+        <tr><td><code>/api/v1/heatpump</code></td><td>PUT</td><td>Freigabe / Warmwasser-Boost / Sollwert</td></tr>
+        <tr><td><code>/api/v1/wallbox</code></td><td>PUT</td><td>Lademodus, Zielladung, Phasenumschaltung</td></tr>
+        <tr><td><code>/api/v1/history</code></td><td>GET</td><td>Historische Energie- &amp; Kostendaten</td></tr>
+      </tbody>
+    </table>
+    <p><b>Sicherheit:</b> OAuth 2.0 / API-Token, TLS 1.3, Rate-Limiting, Fehler-Retry mit Fallback auf letzte gültige Prognose.</p>
+
+    <h3>5.4 Geräteschnittstelle – Wechselrichter (RCT Power)</h3>
+    <p>Der Wechselrichter stellt die Ist-Werte bereit, gegen die geregelt wird: aktueller PV-Ertrag, Batterieladezustand und Leistungsflüsse. Diese Schnittstelle ist die Grundlage von FA-01 und Voraussetzung für jede Überschussberechnung.</p>
+    <div class="note"><strong>Wesentliche Randbedingung:</strong> RCT Power stellt <em>keine</em> offene, dokumentierte REST-API bereit. Die Kommunikation erfolgt über ein proprietäres, binäres Protokoll über TCP im lokalen Netz; praktische Implementierungen beruhen auf Reverse Engineering.</p></div>
+    <h4>5.4.1 Zugriffsweg und Bibliothek</h4>
+    <table>
+      <thead><tr><th>Aspekt</th><th>Festlegung</th></tr></thead>
+      <tbody>
+        <tr><td>Transport</td><td>TCP, Standardport 8899, direkte Verbindung zum Wechselrichter im LAN</td></tr>
+        <tr><td>Protokoll</td><td>RCT Power Serial Communication Protocol (binär, objektbasiert)</td></tr>
+        <tr><td>Bibliothek</td><td><code>rctclient</code> (Python, Open Source) – Registry der Objekt-IDs, CLI und Programmierschnittstelle</td></tr>
+        <tr><td>Alternative</td><td>Home-Assistant-Integration „RCT Power" (HACS)</td></tr>
+        <tr><td>Cloud-Abhängigkeit</td><td>keine – Abfrage vollständig lokal, auch bei Internetausfall</td></tr>
+      </tbody>
+    </table>
+    <h4>5.4.4 Anforderungen (Auszug)</h4>
+    <table>
+      <thead><tr><th>ID</th><th>Anforderung</th><th>Priorität</th></tr></thead>
+      <tbody>
+        <tr><td class="id">WR-01</td><td>Das EMS liest Batterie-SoC, PV-Leistung je Strang, Hausverbrauch und Netzleistung zyklisch (5–10 s) vom Wechselrichter.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">WR-02</td><td>Der Zugriff erfolgt über genau einen Verbindungs-Handler; konkurrierende Zugriffe werden ausgeschlossen.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">WR-03</td><td>Die Anbindung wird hinter einer generischen Geräteschnittstelle gekapselt (Adapter-Muster).</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">WR-04</td><td>Fällt die Verbindung aus, arbeitet das EMS mit letzten gültigen Werten weiter und geht nach 60 s in einen sicheren Zustand.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">WR-05…09</td><td>Konfigurierbare Objekt-IDs, Plausibilitätstest nach Firmware-Update, Whitelist für Schreibzugriffe, Historisierung, Wechsel auf Modbus TCP ohne Änderung der Regel-Engine.</td><td class="pri-mittel">Mittel–Hoch</td></tr>
+      </tbody>
+    </table>
+
+    <h3>5.5 Fahrzeugschnittstelle – Renault Zoe</h3>
+    <p>Die Fahrzeugdaten ergänzen die Ladesteuerung um Ladezustand der Traktionsbatterie und Kilometerstand. Sie werden für die Zielladungsplanung (FA-07), die Reichweitenanzeige (7.1) und die Verbrauchsauswertung benötigt.</p>
+    <div class="note"><strong>Abgrenzung zur Wallbox:</strong> Die Fahrzeugschnittstelle ist <em>nicht</em> Teil der Regelschleife. Die überschussgeführte Ladung und die Phasenumschaltung (SL-04) werden ausschließlich über die lokale Wallbox gesteuert (vgl. 5.6), weil diese latenzarm und ohne Cloud-Abhängigkeit arbeitet. Renault liefert nur ergänzende Informations- und Planungsdaten mit deutlich geringerer Aktualisierungsrate.</div>
+    <h4>5.5.1 Zugriffsweg</h4>
+    <table>
+      <thead><tr><th>Aspekt</th><th>Festlegung</th></tr></thead>
+      <tbody>
+        <tr><td>Schnittstelle</td><td>Renault Kamereon API (Backend der MY-Renault-App) – nicht offiziell dokumentiert</td></tr>
+        <tr><td>Authentifizierung</td><td>Gigya-Anmeldung mit MY-Renault-Zugangsdaten, dann Token für Kamereon</td></tr>
+        <tr><td>Bibliothek</td><td><code>renault-api</code> (Python, Open Source)</td></tr>
+        <tr><td>Cloud-Abhängigkeit</td><td><b>vollständig</b> – Zugriff nur über Renault-Server</td></tr>
+      </tbody>
+    </table>
+    <h4>5.5.4 Anforderungen (Auszug)</h4>
+    <table>
+      <thead><tr><th>ID</th><th>Anforderung</th><th>Priorität</th></tr></thead>
+      <tbody>
+        <tr><td class="id">FZ-03</td><td>Die Regelschleife für die überschussgeführte Ladung arbeitet ausschließlich mit lokalen Wallbox-Messwerten; Fahrzeugdaten dienen nur der Planung und Anzeige.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">FZ-04</td><td>Bei Nichtverfügbarkeit der Schnittstelle bleibt das EMS uneingeschränkt funktionsfähig; die Ladung erfolgt weiter überschussgeführt über die Wallbox.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">FZ-05</td><td>Ist kein aktueller SoC verfügbar, wird konservativ geplant und der Nutzer in der App darauf hingewiesen.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">FZ-06</td><td>Zugangsdaten des MY-Renault-Kontos werden verschlüsselt gespeichert und nie im Klartext protokolliert.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">FZ-01/02/07…10</td><td>Zyklischer Abruf, Zeitstempel/Altersanzeige, Backoff bei Drosselung, Kapselung, „nicht verfügbar"-Handling, Verbrauchshistorisierung.</td><td class="pri-mittel">Mittel–Niedrig</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============ NEU: 5.6 ============ -->
+    <h3>5.6 Geräteschnittstelle – Wallbox (Pulsar Plus) <span class="new-badge">neu in 1.4</span></h3>
+    <p>Die Wallbox ist das Stellglied der überschussgeführten Fahrzeugladung (SL-04) und liefert zugleich den maßgeblichen, latenzarmen Ist-Messwert der Ladeleistung. Anders als die Renault-Schnittstelle (5.5), die nur informativ und cloudabhängig ist, muss die Wallbox-Anbindung in der Regelschleife liegen: Sie setzt Ladefreigabe, Stromsollwert und Phasenumschaltung um (FA-06) und meldet den tatsächlichen Ladestrom zurück. Die Anbindung soll – analog zum Wechselrichter (5.4) – lokal und ohne zwingende Cloud-Abhängigkeit funktionieren.</p>
+    <div class="note"><strong>Wesentliche Randbedingung:</strong> Die Pulsar Plus stellt <em>keine</em> offene, lokale REST-API bereit. Für die Steuerung existieren drei praktisch nutzbare Wege mit unterschiedlichem Reifegrad und unterschiedlicher Cloud-Abhängigkeit. Da die Ladesteuerung sicherheits- und regelkritisch ist, wird der Zugriffsweg bewusst festgelegt und – wie bei Wechselrichter und Fahrzeug – hinter einer generischen Geräteschnittstelle gekapselt.</div>
+
+    <h4>5.6.1 Auswahl des Zugriffswegs</h4>
+    <table>
+      <thead><tr><th>Zugriffsweg</th><th>Cloud-Abhängigkeit</th><th>Steuerbar</th><th>Bewertung</th></tr></thead>
+      <tbody>
+        <tr><td><b>OCPP 1.6j</b><br>(Charger → lokaler CSMS)</td><td>keine – Charger verbindet sich mit lokalem Backend im LAN</td><td>Ladefreigabe (Start/Stop), Stromsollwert über <code>SetChargingProfile</code></td><td>Herstellerneutral und offen; empfohlener Primärweg. Erfordert Umstellen der Box auf lokalen OCPP-Server; myWallbox-Cloud-Funktionen entfallen dann weitgehend.</td></tr>
+        <tr><td><b>Lokale MQTT-/BLE-Bridge</b><br>(Open Source)</td><td>keine – vollständig lokal (BLE/MQTT)</td><td>Lock/Unlock, Pause/Resume, max. Ladestrom, Halo-LED</td><td>Schnelle lokale Werte (Polling ~1 s), Cloud bleibt parallel nutzbar. Beruht auf Reverse Engineering, keine Herstellerzusage.</td></tr>
+        <tr><td><b>myWallbox Cloud-API</b><br>(inoffiziell)</td><td>vollständig – über Wallbox-Server</td><td>Status lesen, Lock, Pause/Resume, max. Ladestrom</td><td>Ohne lokale Installation nutzbar, aber undokumentiert, Token kurzlebig (~60 s), teils Änderungsrate ≥ 30 s, bei Serverausfall blind. Nur Fallback.</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>Festlegung:</strong> Primärweg ist <b>OCPP 1.6j gegen einen lokal betriebenen CSMS-Server</b> (herstellerneutral, lokal, in der Regelschleife). Als Rückfallebene für reine Statusanzeige kann die lokale MQTT-Bridge dienen. Die inoffizielle Cloud-API wird nur als letzter Fallback und ausschließlich lesend vorgesehen. Der Zugriffsweg ist über Konfiguration austauschbar (Adapter-Muster wie in 5.4 / 5.5).</div>
+
+    <h4>Hardware- und Protokollgrenzen (unabhängig vom Zugriffsweg)</h4>
+    <ul>
+      <li><b>Mindeststrom 6 A</b> (IEC 61851 / SAE J1772): darunter lädt das Fahrzeug nicht. Der EMS-Sollwert darf 6 A nicht unterschreiten, sondern muss stattdessen pausieren.</li>
+      <li><b>Sollwertänderungen entprellen:</b> die Pulsar quittiert Stromänderungen erfahrungsgemäß nur etwa alle 30 s zuverlässig; der Regeltakt für die Wallbox ist entsprechend zu begrenzen.</li>
+      <li><b>Nur ein steuerndes Backend gleichzeitig:</b> paralleler OCPP- und Cloud-/App-Zugriff auf denselben Sollwert ist zu vermeiden (kollidierende Ladeprofile).</li>
+      <li><b>Phasenumschaltung</b> (1-/3-phasig, SL-04) erfolgt hardwareseitig über die Installation bzw. einen vorgeschalteten Umschalter; das EMS steuert nur, sofern die Installation dies unterstützt.</li>
+    </ul>
+
+    <h4>5.6.2 Zugriffsweg und Bibliothek</h4>
+    <table>
+      <thead><tr><th>Aspekt</th><th>Festlegung</th></tr></thead>
+      <tbody>
+        <tr><td>Protokoll (primär)</td><td>OCPP 1.6j (JSON über WebSocket); Charger als Client, EMS betreibt lokalen CSMS-Endpunkt</td></tr>
+        <tr><td>Steuerbefehl Strom</td><td><code>SetChargingProfile</code> mit temporärem <code>TxProfile</code> (schont nichtflüchtigen Speicher gegenüber Default-Profilen)</td></tr>
+        <tr><td>Steuerbefehl Freigabe</td><td><code>RemoteStartTransaction</code> / <code>RemoteStopTransaction</code></td></tr>
+        <tr><td>Verbindung</td><td>Charger-Konfiguration auf lokale CSMS-URL (z. B. <code>ws://&lt;ems-host&gt;:8083</code>), Charge-Point-Identity = Seriennummer der Box</td></tr>
+        <tr><td>Bibliothek / Server</td><td>OCPP-CSMS-Implementierung (Open Source, z. B. auf Basis der <code>ocpp</code>-Python-Lib); alternativ evcc als vorgelagerter Ladecontroller</td></tr>
+        <tr><td>Fallback (lesend)</td><td>lokale MQTT-Bridge (BLE) für Status; Cloud-API nur als letzter Ausweg</td></tr>
+        <tr><td>Cloud-Abhängigkeit</td><td>keine im Primärweg – Ladesteuerung funktioniert vollständig lokal (vgl. Kap. 8, Verfügbarkeit)</td></tr>
+      </tbody>
+    </table>
+
+    <h4>5.6.3 Benötigte Mess- und Stellgrößen</h4>
+    <table>
+      <thead><tr><th>Größe</th><th>Richtung</th><th>Verwendung</th></tr></thead>
+      <tbody>
+        <tr><td>Ladeleistung / Ladestrom (Ist)</td><td>lesen</td><td>maßgeblicher Ist-Wert der Überschussregelung (SL-04)</td></tr>
+        <tr><td>Ladezustand des Steckers (verbunden / lädt / beendet)</td><td>lesen</td><td>Erkennung „Fahrzeug angeschlossen", Zustandsautomat</td></tr>
+        <tr><td>Verfügbarer / gesetzter Max-Strom</td><td>lesen/schreiben</td><td>Sollwertvorgabe aus dem Überschuss</td></tr>
+        <tr><td>Phasenzahl (1-/3-phasig)</td><td>lesen/schreiben*</td><td>Umschaltung nach SL-04 (installationsabhängig)</td></tr>
+        <tr><td>Ladefreigabe (Start/Stop)</td><td>schreiben</td><td>Freigabe nur bei echtem Überschuss</td></tr>
+        <tr><td>Geladene Energie je Session</td><td>lesen</td><td>Kostenzuordnung, Verbrauchsauswertung (Kap. 3)</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.85rem;color:var(--muted)">* Phasenumschaltung nur, sofern die Installation dies unterstützt; sonst fest verdrahtete Phasenzahl.</p>
+
+    <h4>5.6.4 Anforderungen</h4>
+    <table>
+      <thead><tr><th>ID</th><th>Anforderung</th><th>Priorität</th></tr></thead>
+      <tbody>
+        <tr><td class="id">WB-01</td><td>Das EMS liest Ladestatus, Ist-Ladestrom/-leistung und Steckerzustand der Wallbox zyklisch (Regeltakt ≥ 30 s wegen Entprellung).</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">WB-02</td><td>Das EMS setzt den maximalen Ladestrom überschussgeführt über <code>SetChargingProfile</code> (temporäres <code>TxProfile</code>) und gibt die Ladung frei bzw. pausiert sie.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">WB-03</td><td>Der Sollwert unterschreitet nie 6 A; ist weniger Überschuss verfügbar, wird pausiert statt untertourig geladen.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">WB-04</td><td>Es steuert zu jedem Zeitpunkt genau ein Backend die Wallbox; konkurrierende Cloud-/App-Steuerbefehle werden ausgeschlossen bzw. deaktiviert.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">WB-05</td><td>Fällt die Wallbox-Verbindung aus, geht das EMS nach 60 s in einen sicheren Zustand (keine überschussgeführten Schaltvorgänge, Sollwert wird nicht erhöht).</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">WB-06</td><td>Die Wallbox-Anbindung wird hinter einer generischen Geräteschnittstelle gekapselt (Adapter-Muster), sodass die Regel-Engine kein wallbox-spezifisches Protokoll kennt.</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">WB-07</td><td>Der Zugriffsweg (OCPP lokal / MQTT-Bridge / Cloud-Fallback) ist per Konfiguration wählbar; ein Wechsel erfolgt ohne Codeänderung an der Regel-Engine.</td><td class="pri-mittel">Mittel</td></tr>
+        <tr><td class="id">WB-08</td><td>Die Phasenumschaltung (1-/3-phasig, SL-04) wird angesteuert, sofern die Installation dies unterstützt; andernfalls wird die feste Phasenzahl berücksichtigt.</td><td class="pri-mittel">Mittel</td></tr>
+        <tr><td class="id">WB-09</td><td>Ladestrom-Sollwerte und Freigaben werden mit Zeitstempel historisiert (Abgleich mit Wallbox-Ist und PV-Prognose, WA-08).</td><td class="pri-mittel">Mittel</td></tr>
+        <tr><td class="id">WB-10</td><td>Wird ausschließlich die Cloud-API genutzt, erfolgt der Zugriff nur lesend; die überschussgeführte Regelung wird konservativ ausgelegt.</td><td class="pri-niedrig">Niedrig</td></tr>
+      </tbody>
+    </table>
+
+    <h4>5.6.5 Normalisierte interne Repräsentation</h4>
+<pre>GET /api/v1/device/wallbox   Response 200 (JSON):
+{ "vendor": "wallbox", "model": "pulsar-plus",
+  "adapter": "ocpp-1.6j",          // ocpp-1.6j | mqtt-bridge | cloud
+  "timestamp": "2026-07-22T12:31:05+02:00", "stale": false,
+  "connection": { "plug": "plugged", "status": "charging" },
+  "charging": { "power_kw": 6.9, "current_a": 10, "phases": 3,
+                "max_current_a": 16, "min_current_a": 6 },
+  "control": { "backend": "local-ocpp", "writable": true },
+  "session": { "energy_kwh": 4.8 } }</pre>
+    <p>Das Feld <code>adapter</code> zeigt den aktiven Zugriffsweg an; <code>stale</code> kennzeichnet Werte aus dem Fallback-Zwischenspeicher, bei denen die Regel-Engine überschussgeführte Schaltvorgänge unterdrückt (analog WR-04 / FZ-04).</p>
+
+    <h4>5.6.6 Risikobewertung</h4>
+    <table>
+      <thead><tr><th>Risiko</th><th>Auswirkung</th><th>Maßnahme</th></tr></thead>
+      <tbody>
+        <tr><td>Keine offene lokale REST-API</td><td>Zugriff nur über OCPP oder Reverse-Engineering-Wege</td><td>OCPP 1.6j als Primärweg (WB-02), Kapselung (WB-06)</td></tr>
+        <tr><td>OCPP-Betrieb deaktiviert Cloud-Funktionen</td><td>myWallbox-App/-Portal eingeschränkt nutzbar</td><td>Betriebshinweis im Nutzerhandbuch; MQTT-Bridge als Alternative (WB-07)</td></tr>
+        <tr><td>Sollwertänderungen zu häufig</td><td>Verschleiß des nichtflüchtigen Speichers, ignorierte Befehle</td><td>Temporäres <code>TxProfile</code>, Regeltakt ≥ 30 s (WB-01/02)</td></tr>
+        <tr><td>Konkurrierende Steuerbackends</td><td>Kollidierende Ladeprofile, unvorhersehbares Verhalten</td><td>Genau ein steuerndes Backend (WB-04)</td></tr>
+        <tr><td>Cloud-/Verbindungsausfall</td><td>Verlust der Fahrzeugladesteuerung</td><td>Lokaler Primärweg, sicherer Zustand nach 60 s (WB-05)</td></tr>
+        <tr><td>Firmware-/Protokolländerungen der Box</td><td>Bruch des Adapters</td><td>Konfigurierbarer Zugriffsweg, Adapter-Architektur (WB-06/07)</td></tr>
+      </tbody>
+    </table>
+    <!-- ============ ENDE 5.6 ============ -->
+  </div>
+
+  <div class="card">
+    <h2>6. Steuerungslogik &amp; Optimierungsregeln</h2>
+    <div class="rule"></div>
+    <table>
+      <thead><tr><th>ID</th><th>Regel</th></tr></thead>
+      <tbody>
+        <tr><td class="id">SL-01</td><td>Haus-Grundlast wird immer zuerst aus direkter PV gedeckt.</td></tr>
+        <tr><td class="id">SL-02</td><td>Bei hoher PV-Prognose wird die Akku-Ladung bewusst verzögert (Mittags-Ziel statt Vormittag), um Einspeisespitzen für den Eigenverbrauch zu nutzen.</td></tr>
+        <tr><td class="id">SL-03</td><td>Wärmepumpe: Warmwasser-Erzeugung wird in das PV-Überschussfenster (10–16 Uhr) verschoben; Estrich/Puffer leichte Vorwärmung bei Überschuss.</td></tr>
+        <tr><td class="id">SL-04</td><td>Zoe lädt nur bei echtem Überschuss; 3-phasig bei &gt; 4,1 kW verfügbarem Überschuss, sonst 1-phasig ab 1,4 kW. Umsetzung über die Wallbox (vgl. 5.6).</td></tr>
+        <tr><td class="id">SL-05</td><td>Hausakku wird nicht zum Laden des Autos entladen; Auto bevorzugt aus direkter PV.</td></tr>
+        <tr><td class="id">SL-06</td><td>Bei negativen/sehr niedrigen Börsenpreisen: gezielter Netzbezug für WP/Zoe möglich, Hausakku schonen.</td></tr>
+        <tr><td class="id">SL-07</td><td>Bei § 14a-Reduzierungssignal: steuerbare Verbraucher auf zulässige Mindestleistung begrenzen.</td></tr>
+        <tr><td class="id">SL-08</td><td>Winterlogik: Wärmepumpe = Hauptgrund für Netzbezug → bevorzugt Niedrigpreisfenster nutzen.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>7. iPhone-App (Steuerung &amp; Information)</h2>
+    <div class="rule"></div>
+    <p>Native App (Swift / SwiftUI), kompatibel ab iOS 16, optimiert für iPhone, optional Apple-Watch-Widget.</p>
+    <h3>7.1 Informationsfunktionen</h3>
+    <ul>
+      <li>Live-Dashboard: PV-Erzeugung, Verbrauch, Batterie-SoC, Netzbezug/-einspeisung als Energiefluss-Diagramm</li>
+      <li>Autarkiegrad &amp; Eigenverbrauchsquote (Tag/Monat/Jahr)</li>
+      <li>PV-Prognose der nächsten 48 h (grafisch)</li>
+      <li>Börsenstrompreis-Kurve mit farblicher Kennzeichnung günstiger/teurer Stunden</li>
+      <li>Kostenübersicht: gespartes Geld, Netzbezugskosten, Einspeisevergütung</li>
+      <li>Ladezustand &amp; erwartete Reichweite Zoe, aktueller Wallbox-Ladestrom</li>
+    </ul>
+    <h3>7.2 Steuerungsfunktionen</h3>
+    <ul>
+      <li>Betriebsmodi umschalten: „Max. Eigenverbrauch" / „Kostenoptimiert" / „Netzdienlich" / „Manuell"</li>
+      <li>Zoe: Zielladung &amp; Abfahrtszeit festlegen (z. B. 80 % bis 07:00)</li>
+      <li>Wärmepumpe: Warmwasser-Boost, Urlaubsmodus, Komfortstufe</li>
+      <li>Batterie: SoC-Reserve für Abend definieren</li>
+      <li>Push-Benachrichtigungen: „PV-Überschuss aktiv – jetzt günstig laden", „Negativer Börsenpreis", „§14a-Reduzierung aktiv"</li>
+    </ul>
+    <h3>7.3 App-Anforderungstabelle</h3>
+    <table>
+      <thead><tr><th>ID</th><th>Anforderung</th><th>Priorität</th></tr></thead>
+      <tbody>
+        <tr><td class="id">AP-01</td><td>Echtzeit-Dashboard mit Aktualisierung ≤ 10 s</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">AP-02</td><td>Modus-Umschaltung mit sofortiger Bestätigung</td><td class="pri-hoch">Hoch</td></tr>
+        <tr><td class="id">AP-03</td><td>Push-Benachrichtigungen (APNs)</td><td class="pri-mittel">Mittel</td></tr>
+        <tr><td class="id">AP-04</td><td>Face ID / Touch ID zur Authentifizierung</td><td class="pri-mittel">Mittel</td></tr>
+        <tr><td class="id">AP-05</td><td>Offline-Anzeige der letzten Werte</td><td class="pri-niedrig">Niedrig</td></tr>
+        <tr><td class="id">AP-06</td><td>Barrierefreiheit (Dynamic Type, VoiceOver)</td><td class="pri-niedrig">Niedrig</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>8. Nicht-funktionale Anforderungen</h2>
+    <div class="rule"></div>
+    <table>
+      <thead><tr><th>Kategorie</th><th>Anforderung</th></tr></thead>
+      <tbody>
+        <tr><td>Verfügbarkeit</td><td>EMS-Kern ≥ 99,5 %, lokal lauffähig auch bei Internetausfall (Fallback-Regeln). Wallbox-Ladesteuerung über lokalen OCPP-Weg (vgl. 5.6) internetunabhängig.</td></tr>
+        <tr><td>Performance</td><td>Steuerbefehle werden in ≤ 2 s umgesetzt (Wallbox-Sollwert entprellt, Regeltakt ≥ 30 s)</td></tr>
+        <tr><td>Sicherheit</td><td>TLS 1.3, verschlüsselte Tokens, keine Klartext-Passwörter, regelmäßige Updates</td></tr>
+        <tr><td>Datenschutz</td><td>DSGVO-konform, lokale Datenhaltung bevorzugt, minimale Cloud-Übertragung</td></tr>
+        <tr><td>Skalierbarkeit</td><td>modularer Aufbau für spätere Verbraucher (2. Wallbox, Heizstab)</td></tr>
+        <tr><td>Wartbarkeit</td><td>Logging, Fehlermonitoring, OTA-Firmware-Updates</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>9. Rechtliche &amp; regulatorische Anforderungen</h2>
+    <div class="rule"></div>
+    <ul>
+      <li><b>§ 14a EnWG:</b> Wärmepumpe, Wallbox und Speicher gelten als steuerbare Verbrauchseinrichtungen. Das EMS muss Netzbetreiber-Reduzierungssignale verarbeiten und reduzierte Netzentgelte berücksichtigen.</li>
+      <li><b>Dynamische Tarife (seit 2025 verpflichtend):</b> Das EMS nutzt zeitvariable Preissignale zur Lastoptimierung.</li>
+      <li><b>Messkonzept:</b> Anbindung an intelligentes Messsystem (Smart Meter Gateway) nach MsbG.</li>
+      <li><b>DSGVO:</b> Verarbeitung personenbezogener Verbrauchsdaten nur mit Zweckbindung und Einwilligung.</li>
+      <li><b>Normen:</b> Berücksichtigung von SG-Ready (Wärmepumpe), ISO 15118 / OCPP 1.6j (Wallbox-Kommunikation).</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>10. Systemarchitektur (Überblick)</h2>
+    <div class="rule"></div>
+    <h4>Schichtenmodell</h4>
+    <ul>
+      <li><b>Geräteschicht:</b> Wechselrichter (RCT Power, proprietäres TCP-Protokoll – gekapselt über Adapter, vgl. 5.4), Batterie-BMS, Wärmepumpe (SG-Ready), Wallbox (Pulsar Plus, OCPP 1.6j lokal – vgl. 5.6), Smart Meter</li>
+      <li><b>EMS-Kern (Edge/Local):</b> Datenerfassung, Prognose-Engine, Optimierungsalgorithmus, Regel-Engine</li>
+      <li><b>Integrationsschicht:</b> REST-Clients für Wetter- &amp; Börsen-API, Fahrzeug-Backend (Renault, cloudbasiert, vgl. 5.5), lokaler OCPP-CSMS für die Wallbox, Netzbetreiber-Schnittstelle (§14a)</li>
+      <li><b>API-Gateway:</b> Interne REST-API (authentifiziert) für die App</li>
+      <li><b>Präsentationsschicht:</b> iPhone-App (SwiftUI), Push-Service (APNs)</li>
+    </ul>
+    <div class="steps">
+      <div class="step">Wetter-API</div>
+      <div class="step">Börsen-API</div>
+      <div class="step">Geräte-Adapter (WR / WP / Wallbox-OCPP)</div>
+      <div class="step">EMS-Kern (Optimierung)</div>
+      <div class="step">Geräte-Steuerung</div>
+      <div class="step">iPhone-App</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>11. Abnahmekriterien &amp; Meilensteine</h2>
+    <div class="rule"></div>
+    <h4>Abnahmekriterien</h4>
+    <ul>
+      <li>Autarkiegrad im Sommertest ≥ 85 % über repräsentative Woche</li>
+      <li>PV-Prognose-Abweichung ≤ 15 % (Tageswert)</li>
+      <li>Überschussgeführte Zoe-Ladung mit korrekter Phasenumschaltung über die Wallbox nachgewiesen (vgl. 5.6, SL-04)</li>
+      <li>Wallbox-Steuerung funktioniert über den lokalen OCPP-Weg auch bei getrennter Internetverbindung</li>
+      <li>§14a-Reduzierungssignal führt reproduzierbar zur Leistungsbegrenzung</li>
+      <li>App zeigt Live-Daten &lt; 10 s Latenz und steuert alle Verbraucher zuverlässig</li>
+    </ul>
+    <h4>Grobe Meilensteinplanung</h4>
+    <table>
+      <thead><tr><th>Phase</th><th>Inhalt</th><th>Dauer</th></tr></thead>
+      <tbody>
+        <tr><td>M1</td><td>Anforderungsfreigabe &amp; Feinkonzept</td><td>2 Wochen</td></tr>
+        <tr><td>M2</td><td>API-Anbindung (Wetter/Börse) &amp; Datenerfassung (inkl. Wallbox-OCPP)</td><td>4 Wochen</td></tr>
+        <tr><td>M3</td><td>Optimierungs-/Regel-Engine</td><td>5 Wochen</td></tr>
+        <tr><td>M4</td><td>iPhone-App (MVP)</td><td>5 Wochen</td></tr>
+        <tr><td>M5</td><td>Integrationstest, § 14a, Feldtest</td><td>4 Wochen</td></tr>
+        <tr><td>M6</td><td>Abnahme &amp; Go-Live</td><td>2 Wochen</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="foot">
+    Anforderungsdokument „Smart Grid Eigenheim" – erstellt für Frank Arendt · Version 1.4 · Entwurf<br>
+    Angaben zu Energiemengen sind Schätzwerte und im Feldtest zu verifizieren.<br>
+    Wallbox-API-Optionen (Kap. 5.6) recherchiert am 25.07.2026; konkrete OCPP-/Objektnamen sind implementierungsseitig am Gerät zu verifizieren.
+  </div>
+
+</div>
+</body>
+</html>
