@@ -196,7 +196,7 @@
 <style>
   :root{
     --bg:#0f1419;--panel:#1a2129;--panel2:#212b35;--ink:#e8edf2;--muted:#9aa9b8;--line:#2e3a47;
-    --nano:#7d7de0;--klein:#4ea1d3;--mittel:#e0a458;--gross:#d1607a;--accent:#5ad19a;--gold:#ffd479;
+    --nano:#8b8bec;--klein:#4ea1d3;--mittel:#e0a458;--gross:#e0748d;--accent:#5ad19a;--gold:#ffd479;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -206,7 +206,7 @@
   header .sub{color:var(--muted);font-size:.95rem;margin-bottom:24px}
 
   .toc{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 22px;margin-bottom:30px}
-  .toc h3{margin:0 0 10px;font-size:.95rem;color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
+  .toc h2{margin:0 0 10px;font-size:.95rem;color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
   .toc ol{margin:0;padding-left:20px;columns:2;column-gap:32px}
   @media(max-width:640px){.toc ol{columns:1}}
   .toc li{margin:4px 0;font-size:.87rem}
@@ -253,8 +253,8 @@
   .usecases{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0 8px}
   @media(max-width:640px){.usecases{grid-template-columns:1fr}}
   .uc-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 18px}
-  .uc-card h4{margin:0 0 8px;font-size:.95rem}
-  .uc-card.priv h4{color:var(--klein)} .uc-card.kmu h4{color:var(--accent)}
+  .uc-card h3{margin:0 0 8px;font-size:.95rem}
+  .uc-card.priv h3{color:var(--klein)} .uc-card.kmu h3{color:var(--accent)}
   .uc-card ul{margin:0;padding-left:18px}
   .uc-card li{margin:4px 0;font-size:.85rem;color:#cdd8e2}
 
@@ -279,8 +279,8 @@
   .tabpanel.hidden{display:none}
   .phase{margin:26px 0}
   .phase:first-child{margin-top:6px}
-  .phase h4{color:var(--gold);font-size:1rem;margin:0 0 4px;display:flex;align-items:center;gap:8px}
-  .phase h4 .pn{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(255,212,121,.15);color:var(--gold);font-size:.78rem;font-weight:700;flex:none}
+  .phase h3{color:var(--gold);font-size:1rem;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+  .phase h3 .pn{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(255,212,121,.15);color:var(--gold);font-size:.78rem;font-weight:700;flex:none}
   .phase .goal{color:var(--muted);font-size:.82rem;margin:0 0 10px}
   .clicksteps{margin:0;padding-left:0;list-style:none;counter-reset:step}
   .clicksteps>li{counter-increment:step;margin:0 0 9px;padding-left:30px;position:relative;font-size:.86rem;color:#cdd8e2;line-height:1.55}
@@ -305,7 +305,7 @@
 </header>
 
 <nav class="toc" id="top" aria-label="Inhaltsverzeichnis">
-  <h3>Inhalt</h3>
+  <h2>Inhalt</h2>
   <ol>
     <li><a href="#aktualitaet">Wichtiger Hinweis: Aktualität, Grenzen &amp; fehlendes Benchmarking</a></li>
     <li><a href="#risiken">Warum onsite? Risiken großer Cloud-KI</a></li>
@@ -376,13 +376,13 @@
   <p style="color:var(--muted);font-size:.86rem;margin-top:-4px">Eingepflegt aus einer separaten Rechtsorientierung (Stand: 07.08.2026, nach Digital Omnibus). <b>Keine Rechtsberatung</b> – dient nur der eigenen Einordnung; bei konkreten Vorhaben professionell prüfen lassen (siehe Trennlinie am Ende dieses Abschnitts). Gekürzt auf die Punkte, die für Privatpersonen &amp; KMU als <em>Nutzer</em> eines lokalen Modells (nicht als Modell-<em>Anbieter</em>) relevant sind.</p>
 
   <div class="usecases" style="margin-top:16px">
-    <div class="uc-card priv"><h4>Entfällt / entschärft sich durch Onsite</h4><ul>
+    <div class="uc-card priv"><h3>Entfällt / entschärft sich durch Onsite</h3><ul>
       <li>Datentransfer in Drittländer (v. a. USA) – <b>entfällt vollständig</b>, Daten verlassen das eigene Haus nicht</li>
       <li>Auftragsverarbeitungsvertrag (AVV) mit einem Cloud-KI-Anbieter – <b>entfällt</b>, es gibt keinen externen Auftragsverarbeiter</li>
       <li>Risiko, dass Prompt-Inhalte ins Anbieter-Training einfließen – <b>entfällt</b>, ein lokales Open-Weight-Modell trainiert nicht automatisch nach</li>
       <li>Kontrolle über Speicherorte für Auskunfts-/Löschpflichten – <b>wird einfacher</b> (eigene Vektor-DB, volle Hoheit)</li>
     </ul></div>
-    <div class="uc-card kmu"><h4>Bleibt unverändert bestehen</h4><ul>
+    <div class="uc-card kmu"><h3>Bleibt unverändert bestehen</h3><ul>
       <li>EU-AI-Act-Risikoklasse eines Use-Case – hängt am <b>Einsatzzweck</b>, nicht am Hosting-Ort</li>
       <li>Rechtsgrundlage &amp; ggf. Pseudonymisierung personenbezogener Daten im Prompt (Art. 6 DSGVO)</li>
       <li>Auskunfts- &amp; Löschpflichten (Art. 15, 17 DSGVO) – müssen weiterhin technisch nachvollziehbar sein</li>
@@ -462,13 +462,13 @@
   <p style="color:var(--muted);font-size:.86rem;margin-top:-4px">Kernsatz vorweg: <b>Onsite verlagert Risiko, es beseitigt es nicht.</b> Was beim Cloud-Anbieter lag – Härtung, Patching, Zugriffskontrolle, Verfügbarkeit – liegt jetzt vollständig im eigenen Haus. Auditrelevant wird damit <em>mehr</em>, nicht weniger.</p>
 
   <div class="usecases" style="margin-top:16px">
-    <div class="uc-card priv"><h4>Risiken, die durch Onsite wegfallen</h4><ul>
+    <div class="uc-card priv"><h3>Risiken, die durch Onsite wegfallen</h3><ul>
       <li>Datenabfluss an Dritte &amp; Mitlese-Risiko beim Anbieter</li>
       <li>Anbieter-Lock-in und unkontrollierte Modellwechsel/-abschaltungen</li>
       <li>Drittland-Zugriffe (u. a. CLOUD Act)</li>
       <li>Abhängigkeit von der Sicherheitslage eines externen Dienstes</li>
     </ul></div>
-    <div class="uc-card kmu"><h4>Neue Angriffsfläche, die jetzt ihr tragt</h4><ul>
+    <div class="uc-card kmu"><h3>Neue Angriffsfläche, die jetzt ihr tragt</h3><ul>
       <li><b>Ungeschützter Inference-Server</b> – der häufigste Praxisfehler</li>
       <li><b>Modell-Supply-Chain</b> – Gewichte sind fremder, ausführbarer Code</li>
       <li><b>Prompt Injection &amp; RAG-Poisoning</b> – besonders bei Agenten mit Shell-Zugriff</li>
@@ -584,12 +584,12 @@
   <b>Fazit:</b> Für einen KI-Dauerlast-Pi mindestens den offiziellen Active Cooler einplanen, für 24/7-Betrieb bei Wärme lieber einen Tower-Kühler. Vor dem Kauf die aktuell beste Lösung für den konkreten Aufbau (Gehäuse, Standort, Umgebungstemperatur) gezielt recherchieren – hier zu sparen kostet Lebensdauer.
 </div>
 <div class="usecases">
-  <div class="uc-card priv"><h4>Typische Einsätze – Privat</h4><ul>
+  <div class="uc-card priv"><h3>Typische Einsätze – Privat</h3><ul>
     <li>Offline-Sprachassistent / Smart-Home-Steuerung (Whisper + Piper), der nicht „nach Hause telefoniert“</li>
     <li>Immer-an-Notiz- &amp; Frage-Antwort-Box im Heimnetz (kleine Modelle)</li>
     <li>Autarke Offline-Wissensbox (z. B. Erste-Hilfe-Referenz) aus dem Akku</li>
   </ul></div>
-  <div class="uc-card kmu"><h4>Typische Einsätze – KMU</h4><ul>
+  <div class="uc-card kmu"><h3>Typische Einsätze – KMU</h3><ul>
     <li>Leichte Automatisierung: E-Mail-Triage/Priorisierung auf NAS-nahem Mini-Server</li>
     <li>Lokaler Vorfilter/Klassifikator, der Anfragen an ein größeres System weiterreicht</li>
     <li>Edge-Vorverarbeitung (mit AI HAT+): einfache Bild-/Sensorerkennung vor Ort</li>
@@ -613,12 +613,12 @@
 </table>
 </div>
 <div class="usecases">
-  <div class="uc-card priv"><h4>Typische Einsätze – Privat</h4><ul>
+  <div class="uc-card priv"><h3>Typische Einsätze – Privat</h3><ul>
     <li>Privater Chat-Assistent &amp; Textformulierung (E-Mails, Bewerbungen) – offline</li>
     <li>Zusammenfassen von PDFs, Artikeln und Notizen auf dem eigenen Rechner</li>
     <li>Sprachen lernen &amp; Übersetzen ohne Cloud (Qwen: 100+ Sprachen)</li>
   </ul></div>
-  <div class="uc-card kmu"><h4>Typische Einsätze – KMU</h4><ul>
+  <div class="uc-card kmu"><h3>Typische Einsätze – KMU</h3><ul>
     <li>Interner FAQ-/Wissens-Bot über eigene Dokumente (leichtes RAG)</li>
     <li>E-Mail-Entwürfe, Angebotstexte &amp; Produktbeschreibungen automatisiert</li>
     <li>Klassifizieren &amp; Vorsortieren von Support-Anfragen und Formularen</li>
@@ -646,12 +646,12 @@
   <b>Hinweis Neuware &amp; 24-GB-Klasse:</b> Die früher als Preis-Leistungs-Tipp beliebte 24-GB-Karte war eine <em>gebrauchte</em> RTX 3090. Als Neuware nicht mehr verfügbar; die neue RTX 4090 (24GB) ist auslaufend und teuer (~3.490 €). Deshalb hier für 27–32B neu die <b>RTX 5090 (32GB, ab ~4.100 €)</b>. Wer die hohen Kosten scheut, bleibt bei 16-GB-Modellen (bis ~15B) oder geht auf den deutlich günstigeren &amp; sparsameren Mac-Weg (Cluster 3).
 </div>
 <div class="usecases">
-  <div class="uc-card priv"><h4>Typische Einsätze – Privat</h4><ul>
+  <div class="uc-card priv"><h3>Typische Einsätze – Privat</h3><ul>
     <li>Lokaler Coding-Assistent (Qwen3 32B) für eigene Projekte ohne Cloud</li>
     <li>Anspruchsvolles Schreiben: Longform-Texte, Recherche-Notizen, Lektorat</li>
     <li>Persönliche Wissensdatenbank mit RAG über eigene Dokumente &amp; Bilder</li>
   </ul></div>
-  <div class="uc-card kmu"><h4>Typische Einsätze – KMU</h4><ul>
+  <div class="uc-card kmu"><h3>Typische Einsätze – KMU</h3><ul>
     <li>Interner Coding-/DevOps-Helfer für das Entwicklerteam (Datenschutz)</li>
     <li>Dokumentenanalyse: Verträge, Angebote, Rechnungen prüfen &amp; extrahieren</li>
     <li>Kundenservice-Assistent &amp; Ticket-Beantwortung auf firmeneigenen Daten</li>
@@ -682,12 +682,12 @@
   <b>Wirtschaftlichkeits-Hinweis (Neuware):</b> Bei großen Modellen kippt die Rechnung klar zugunsten des Macs. Ein Mac Studio M5 Max 128GB (~5.200 € Gerät <span class="ref">(abgeleitet, unbestätigt; bis August 2026 galt der M4 Max mit ~4.100 €)</span>, mit SSD-Spiegel &amp; USV ~6.400–6.800 € Gesamtsystem) läuft 70B-Modelle lautlos bei ~85W – ein Multi-GPU-Neubau mit 2×–3× RTX 5090 kostet als Neuware jetzt mehr als das <em>Doppelte</em> und zieht 600–1.200W. Der GPU-Weg lohnt neu nur, wenn maximale Token-Geschwindigkeit oder CUDA-spezifische Software zwingend nötig sind.
 </div>
 <div class="usecases">
-  <div class="uc-card priv"><h4>Typische Einsätze – Privat</h4><ul>
+  <div class="uc-card priv"><h3>Typische Einsätze – Privat</h3><ul>
     <li>Anspruchsvollster lokaler Allround-Assistent auf Cloud-Niveau, voll privat</li>
     <li>Komplexe Analyse &amp; Reasoning: Mathe, Logik, große Recherche-Projekte</li>
     <li>Hobby-Entwicklung ganzer Software-Projekte mit starkem lokalem Coding-Modell</li>
   </ul></div>
-  <div class="uc-card kmu"><h4>Typische Einsätze – KMU</h4><ul>
+  <div class="uc-card kmu"><h3>Typische Einsätze – KMU</h3><ul>
     <li>Firmeneigener KI-Assistent für alle Mitarbeitenden ohne Datenabfluss</li>
     <li>Automatisierte Verarbeitung sensibler Dokumente (Recht, Medizin, Finanzen)</li>
     <li>Agentische Workflows &amp; komplexe RAG-Systeme über große Wissensbestände</li>
@@ -836,11 +836,11 @@
 
   <h3 class="sub-h">Zwei Setups, die funktionieren</h3>
   <div class="usecases">
-    <div class="uc-card priv"><h4>Sparsam · 8 GB, ohne GPU – Aider oder gptme mit einem 4B-Modell</h4>
+    <div class="uc-card priv"><h3>Sparsam · 8 GB, ohne GPU – Aider oder gptme mit einem 4B-Modell</h3>
       <p style="font-size:.85rem;color:#cdd8e2;margin:0 0 8px">Für Prompts, Textarbeit und überschaubare Dateiaufgaben. Software installieren würde diesem Gespann niemand überlassen.</p>
       <div class="cmdblock">ollama pull qwen3:4b<br>ollama serve<br><br># Variante A: Dateien editieren, Git-sicher<br>aider --model ollama_chat/qwen3:4b<br><br># Variante B: Shell und Dateien in einem Agenten<br>gptme --model local/qwen3:4b</div>
     </div>
-    <div class="uc-card kmu"><h4>Ernsthaft · 16–24 GB, mit GPU – OpenCode oder Goose mit Qwen3-Coder</h4>
+    <div class="uc-card kmu"><h3>Ernsthaft · 16–24 GB, mit GPU – OpenCode oder Goose mit Qwen3-Coder</h3>
       <p style="font-size:.85rem;color:#cdd8e2;margin:0 0 8px">Ab hier sind mehrstufige Aufgaben realistisch. Claude Code gegen dasselbe Modell zu testen kostet nur zwei Variablen – aber deutlich mehr Trägheit als OpenCode/Aider erwarten.</p>
       <div class="cmdblock">ollama pull qwen3-coder:30b<br><br># OpenCode: Provider auf Ollama zeigen lassen<br>opencode --model ollama/qwen3-coder:30b<br><br># Claude Code gegen das lokale Modell<br>export ANTHROPIC_BASE_URL=http://localhost:11434<br>export ANTHROPIC_AUTH_TOKEN=ollama<br>claude --model qwen3-coder:30b</div>
     </div>
@@ -1009,7 +1009,7 @@
   <div class="tabpanel" id="tab-win" role="tabpanel">
 
     <div class="phase">
-      <h4><span class="pn">A</span>Grafiktreiber installieren (nur bei NVIDIA-GPU, Cluster 1–3)</h4>
+      <h3><span class="pn">A</span>Grafiktreiber installieren (nur bei NVIDIA-GPU, Cluster 1–3)</h3>
       <p class="goal">Ziel: aktueller NVIDIA-Treiber mit CUDA-Unterstützung, Voraussetzung für GPU-Beschleunigung.</p>
       <ol class="clicksteps">
         <li>Browser öffnen (z. B. Edge oder Chrome) und die Adresse <code>www.nvidia.de/Download/index.aspx</code> eingeben, Enter drücken.</li>
@@ -1029,7 +1029,7 @@
     </div>
 
     <div class="phase">
-      <h4><span class="pn">B</span>Ollama installieren (Modell-Runtime)</h4>
+      <h3><span class="pn">B</span>Ollama installieren (Modell-Runtime)</h3>
       <p class="goal">Ziel: lokaler KI-Server, der Modelle lädt und über eine Adresse im eigenen Netz (<code>http://localhost:11434</code>) bereitstellt.</p>
       <ol class="clicksteps">
         <li>Browser öffnen, Adresse <code>ollama.com</code> eingeben, Enter drücken.</li>
@@ -1043,7 +1043,7 @@
     </div>
 
     <div class="phase">
-      <h4><span class="pn">C</span>Modell herunterladen und testen</h4>
+      <h3><span class="pn">C</span>Modell herunterladen und testen</h3>
       <p class="goal">Ziel: das gewählte Modell (aus der Cluster-Tabelle) lokal laden und im Terminal ausprobieren.</p>
       <ol class="clicksteps">
         <li>Windows-Taste drücken, <code>cmd</code> eingeben, Enter drücken – es öffnet sich das Eingabeaufforderungs-Fenster.</li>
@@ -1062,7 +1062,7 @@
     </div>
 
     <div class="phase">
-      <h4><span class="pn">D</span>Docker Desktop installieren (Voraussetzung für Open WebUI)</h4>
+      <h3><span class="pn">D</span>Docker Desktop installieren (Voraussetzung für Open WebUI)</h3>
       <p class="goal">Ziel: Container-Umgebung, in der die grafische Weboberfläche „Open WebUI“ läuft.</p>
       <ol class="clicksteps">
         <li>Browser: <code>www.docker.com/products/docker-desktop</code> aufrufen.</li>
@@ -1078,7 +1078,7 @@
     </div>
 
     <div class="phase">
-      <h4><span class="pn">E</span>Open WebUI starten (grafische Chat-Oberfläche)</h4>
+      <h3><span class="pn">E</span>Open WebUI starten (grafische Chat-Oberfläche)</h3>
       <p class="goal">Ziel: komfortable Weboberfläche statt Terminal, inkl. Mehrbenutzer &amp; RAG.</p>
       <ol class="clicksteps">
         <li>Bei laufendem Docker Desktop: Windows-Taste → <code>cmd</code> → Enter, um ein Eingabeaufforderungs-Fenster zu öffnen.</li>
@@ -1095,7 +1095,7 @@
     </div>
 
     <div class="phase">
-      <h4><span class="pn">F</span>Tailscale einrichten (VPN für sicheren Fernzugriff)</h4>
+      <h3><span class="pn">F</span>Tailscale einrichten (VPN für sicheren Fernzugriff)</h3>
       <p class="goal">Ziel: von unterwegs auf den heimischen KI-Server zugreifen, ohne einen Port im Internet zu öffnen.</p>
       <ol class="clicksteps">
         <li>Browser: <code>tailscale.com/download/windows</code> aufrufen, Button <b>„Download Tailscale for Windows“</b> anklicken.</li>
@@ -1112,7 +1112,7 @@
     </div>
 
     <div class="phase">
-      <h4><span class="pn">G</span>Alles zusammen testen</h4>
+      <h3><span class="pn">G</span>Alles zusammen testen</h3>
       <ol class="clicksteps">
         <li>Docker Desktop ist geöffnet (grüner Punkt „Engine running“).</li>
         <li>Browser: <code>http://localhost:3000</code> öffnen → Chat-Oberfläche erscheint, Modell antwortet.</li>
@@ -1128,7 +1128,7 @@
     <p style="font-size:.82rem;color:var(--muted);margin-top:0">Anleitung bezogen auf Ubuntu/Debian-basierte Distributionen (häufigste Wahl für KI-Server). Bei anderen Distributionen (Fedora, Arch …) unterscheiden sich nur die Paketbefehle, der Ablauf bleibt gleich.</p>
 
     <div class="phase">
-      <h4><span class="pn">A</span>System aktualisieren</h4>
+      <h3><span class="pn">A</span>System aktualisieren</h3>
       <ol class="clicksteps">
         <li>Terminal öffnen: Tastenkombination <code>Strg</code> + <code>Alt</code> + <code>T</code> (bei den meisten Desktop-Umgebungen) oder über das Anwendungsmenü nach „Terminal“ suchen und anklicken.</li>
         <li>Folgende Zeile eintippen und mit Enter bestätigen, danach bei Bedarf das Benutzerpasswort eintippen (wird beim Tippen nicht sichtbar angezeigt – trotzdem einfach eintippen und Enter drücken):</li>
@@ -1137,7 +1137,7 @@
     </div>
 
     <div class="phase">
-      <h4><span class="pn">B</span>NVIDIA-Treiber &amp; CUDA installieren (nur bei NVIDIA-GPU)</h4>
+      <h3><span class="pn">B</span>NVIDIA-Treiber &amp; CUDA installieren (nur bei NVIDIA-GPU)</h3>
       <ol class="clicksteps">
         <li>Verfügbare Treiber anzeigen lassen:</li>
       </ol>
@@ -1158,7 +1158,7 @@
     </div>
 
     <div class="phase">
-      <h4><span class="pn">C</span>Ollama installieren</h4>
+      <h3><span class="pn">C</span>Ollama installieren</h3>
       <ol class="clicksteps">
         <li>Im Terminal folgende Zeile eintippen und Enter drücken (lädt und installiert Ollama automatisch inkl. systemd-Dienst):</li>
       </ol>
@@ -1171,14 +1171,14 @@
     </div>
 
     <div class="phase">
-      <h4><span class="pn">D</span>Modell herunterladen und testen</h4>
+      <h3><span class="pn">D</span>Modell herunterladen und testen</h3>
       <div class="cmdblock">ollama pull qwen3:4b
 ollama run qwen3:4b</div>
       <p class="mini-note">Modellname je Cluster aus der jeweiligen Tabelle übernehmen (z. B. Cluster 2: <code>qwen3:32b</code>, Cluster 3: <code>qwen3:235b</code>). Nach <code>ollama run …</code> erscheint die Eingabezeile <code>&gt;&gt;&gt;</code> – Testfrage eintippen, Enter drücken, mit <code>/bye</code> beenden.</p>
     </div>
 
     <div class="phase">
-      <h4><span class="pn">E</span>Docker &amp; Open WebUI installieren</h4>
+      <h3><span class="pn">E</span>Docker &amp; Open WebUI installieren</h3>
       <ol class="clicksteps">
         <li>Docker über das offizielle Installationsskript einrichten:</li>
       </ol>
@@ -1199,7 +1199,7 @@ ollama run qwen3:4b</div>
     </div>
 
     <div class="phase">
-      <h4><span class="pn">F</span>Tailscale einrichten (VPN für Fernzugriff)</h4>
+      <h3><span class="pn">F</span>Tailscale einrichten (VPN für Fernzugriff)</h3>
       <div class="cmdblock">curl -fsSL https://tailscale.com/install.sh | sh
 sudo tailscale up</div>
       <ol class="clicksteps">
@@ -1213,7 +1213,7 @@ sudo tailscale up</div>
     </div>
 
     <div class="phase">
-      <h4><span class="pn">G</span>Firewall absichern</h4>
+      <h3><span class="pn">G</span>Firewall absichern</h3>
       <p class="goal">Ziel: sicherstellen, dass Ollama/Open WebUI nur aus dem eigenen Netz bzw. über VPN erreichbar sind, nie offen aus dem Internet.</p>
       <div class="cmdblock">sudo ufw allow from 100.64.0.0/10 to any port 3000
 sudo ufw allow from 100.64.0.0/10 to any port 11434
@@ -1222,7 +1222,7 @@ sudo ufw enable</div>
     </div>
 
     <div class="phase">
-      <h4><span class="pn">H</span>Fortgeschritten (nur Cluster 3, Multi-GPU): vLLM statt Ollama</h4>
+      <h3><span class="pn">H</span>Fortgeschritten (nur Cluster 3, Multi-GPU): vLLM statt Ollama</h3>
       <p class="goal">Für sehr große Modelle mit mehreren Grafikkarten liefert vLLM höheren Durchsatz als Ollama, ist aber reine Terminal-Einrichtung und setzt Linux-Erfahrung voraus.</p>
       <div class="cmdblock">python3 -m venv ~/vllm-env
 source ~/vllm-env/bin/activate
@@ -1238,7 +1238,7 @@ vllm serve Qwen/Qwen3-235B-A22B --tensor-parallel-size 2</div>
     <p style="font-size:.82rem;color:var(--muted);margin-top:0">Gilt für Apple-Silicon-Macs (M-Serie). Grafiktreiber entfällt – Apple Silicon nutzt automatisch die integrierte GPU über Unified Memory.</p>
 
     <div class="phase">
-      <h4><span class="pn">A</span>Ollama installieren</h4>
+      <h3><span class="pn">A</span>Ollama installieren</h3>
       <ol class="clicksteps">
         <li>Browser öffnen, <code>ollama.com</code> aufrufen.</li>
         <li>Button <b>„Download“</b> anklicken, dann <b>„Download for macOS“</b> anklicken. Die Datei <code>Ollama-darwin.zip</code> wird heruntergeladen.</li>
@@ -1252,7 +1252,7 @@ vllm serve Qwen/Qwen3-235B-A22B --tensor-parallel-size 2</div>
     </div>
 
     <div class="phase">
-      <h4><span class="pn">B</span>Modell herunterladen und testen</h4>
+      <h3><span class="pn">B</span>Modell herunterladen und testen</h3>
       <ol class="clicksteps">
         <li>Terminal öffnen: <code>Cmd</code> + <code>Leertaste</code> drücken (Spotlight-Suche öffnet sich), <code>Terminal</code> eintippen, Enter drücken.</li>
         <li>Im Terminal-Fenster eintippen und Enter drücken:</li>
@@ -1263,7 +1263,7 @@ ollama run qwen3:4b</div>
     </div>
 
     <div class="phase">
-      <h4><span class="pn">C</span>Docker Desktop &amp; Open WebUI installieren</h4>
+      <h3><span class="pn">C</span>Docker Desktop &amp; Open WebUI installieren</h3>
       <ol class="clicksteps">
         <li>Browser: <code>www.docker.com/products/docker-desktop</code> aufrufen.</li>
         <li>Je nach Mac-Chip den passenden Button anklicken: <b>„Download for Mac – Apple Silicon“</b>.</li>
@@ -1283,7 +1283,7 @@ ollama run qwen3:4b</div>
     </div>
 
     <div class="phase">
-      <h4><span class="pn">D</span>Tailscale einrichten (VPN)</h4>
+      <h3><span class="pn">D</span>Tailscale einrichten (VPN)</h3>
       <ol class="clicksteps">
         <li>Browser: <code>tailscale.com/download/mac</code> aufrufen, Button <b>„Download Tailscale for macOS“</b> anklicken (führt zum Mac App Store).</li>
         <li>Im App Store auf <b>„Laden“</b> bzw. das Wolken-Symbol klicken; ggf. mit Apple-ID/Touch ID bestätigen.</li>
@@ -1296,7 +1296,7 @@ ollama run qwen3:4b</div>
     </div>
 
     <div class="phase">
-      <h4><span class="pn">E</span>Alternative: LM Studio (grafische App statt Terminal)</h4>
+      <h3><span class="pn">E</span>Alternative: LM Studio (grafische App statt Terminal)</h3>
       <p class="goal">Wer das Terminal ganz vermeiden möchte, kann statt Ollama auch komplett grafisch mit LM Studio arbeiten.</p>
       <ol class="clicksteps">
         <li>Browser: <code>lmstudio.ai</code> aufrufen, Button <b>„Download for Mac (Apple Silicon)“</b> anklicken.</li>
@@ -1315,7 +1315,7 @@ ollama run qwen3:4b</div>
     <p style="font-size:.82rem;color:var(--muted);margin-top:0">Voraussetzung: Der heimische Server (Windows/Linux/Mac) ist bereits nach obiger Anleitung eingerichtet und Tailscale läuft dort. Die Reihenfolge unten gilt gleichermaßen für iPhone/iPad (iOS) und Android.</p>
 
     <div class="phase">
-      <h4><span class="pn">A</span>Tailscale-App installieren und verbinden</h4>
+      <h3><span class="pn">A</span>Tailscale-App installieren und verbinden</h3>
       <ol class="clicksteps">
         <li><b>iOS:</b> App Store öffnen (blaues „A“-Symbol) → oben in die Suchleiste tippen → „Tailscale“ eintippen → Suchtaste auf der Bildschirmtastatur antippen.</li>
         <li><b>Android:</b> Play Store öffnen (buntes Dreieck-Symbol) → Suchleiste antippen → „Tailscale“ eintippen → Enter.</li>
@@ -1329,7 +1329,7 @@ ollama run qwen3:4b</div>
     </div>
 
     <div class="phase">
-      <h4><span class="pn">B</span>Reins installieren und mit dem eigenen Server verbinden (Top-Empfehlung)</h4>
+      <h3><span class="pn">B</span>Reins installieren und mit dem eigenen Server verbinden (Top-Empfehlung)</h3>
       <ol class="clicksteps">
         <li>App Store bzw. Play Store öffnen, „Reins“ suchen, installieren, öffnen.</li>
         <li>Beim ersten Start antippen: <b>„Server hinzufügen“</b> bzw. „Add Server“.</li>
@@ -1344,7 +1344,7 @@ ollama run qwen3:4b</div>
     </div>
 
     <div class="phase">
-      <h4><span class="pn">C</span>Alternative für Apple-Nutzer: Enchanted</h4>
+      <h3><span class="pn">C</span>Alternative für Apple-Nutzer: Enchanted</h3>
       <ol class="clicksteps">
         <li>App Store öffnen, „Enchanted“ suchen (Symbol: stilisierter Lama-Kopf), installieren, öffnen.</li>
         <li>Beim ersten Start unten auf das Zahnrad-Symbol <b>„Settings“</b> tippen.</li>
@@ -1354,7 +1354,7 @@ ollama run qwen3:4b</div>
     </div>
 
     <div class="phase">
-      <h4><span class="pn">D</span>Alternative ohne App-Installation: Open WebUI als Web-App</h4>
+      <h3><span class="pn">D</span>Alternative ohne App-Installation: Open WebUI als Web-App</h3>
       <p class="goal">Nur sinnvoll, wenn auf dem Server bereits Open WebUI (siehe Windows/Linux/Mac-Reiter, Punkt „Docker &amp; Open WebUI“) läuft.</p>
       <ol class="clicksteps">
         <li>Tailscale-VPN auf dem Handy aktivieren (siehe Phase A).</li>
