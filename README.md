@@ -47,6 +47,20 @@ Alle Dokumente sind Entwürfe oder Orientierungshilfen, keine Rechts-, Steuer- o
 - **Ehrliche Einschränkungen:** Feldrichtigkeit auf Testkassenbons nur 41–71 %; einige Prüfungen laufen noch im Shadow-Modus; ein Pilot mit echten deutschen Belegen steht aus
 - **Empfehlung:** vierwöchiger Pilot, danach schrittweise Ablösung des bisherigen Verfahrens
 
+**Beispielrechnung (fiktive, mittelgroße Steuerkanzlei, Modellrechnung der Beratungsdokumentation)**
+
+| Größe | Ist (typisch) | Soll mit SCORE |
+|---|---|---|
+| Belege pro Monat | rund 30.000 | rund 30.000 |
+| Klärfälle (von Hand) | 25 % (7.500 pro Monat) | 13 % (3.900 pro Monat) |
+| Zeit je Klärfall | 2,5 Minuten | 1,2 Minuten |
+| Personal für Klärfälle | 2,5 Vollzeitkräfte | 0,62 Vollzeitkräfte |
+| Kosten pro Jahr | rund 267.750 € (Personal rund 159.750 €, Erkennung rund 108.000 € bei 0,30 € je Beleg) | rund 40.500 € zuzüglich Betrieb und Wartung |
+
+- **Einsparpotenzial:** rund 227.300 € pro Jahr (etwa 85 % der heutigen Kosten), freigesetzt werden rund 1,9 Vollzeitkräfte für Beratung statt Erfassung
+- **Investition:** 20.000 bis 50.000 € für ein bis zwei leistungsfähige Rechner mit lokalen Modellen; Amortisation in gut einem bis knapp drei Monaten, jeweils vor Betriebs- und Wartungskosten
+- **Annahmen:** Dunkelverarbeitung 87 % statt typisch 75 %, Branchenkennzahlen aus eigener Recherche; die Dunkelverarbeitung echter Belege ist erst im Pilot belastbar messbar. Die Kosten je Beleg im Soll beruhen auf gemessenen Testwerten (rund 0,16 Cent je Beleg in der Rechnung, 0,107 Cent im Massentest)
+
 **Hinweis:** Das Dashboard im Konzept-Deck zeigt Beispielwerte (Mockup), keine Messwerte.
 
 ---
