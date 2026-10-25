@@ -1,6 +1,6 @@
 # frank-arendt-references
 
-Referenzunterlagen von Frank Arendt (Diplominformatiker, Bretten): Konzepte, Studien und Aufstellungen aus den Bereichen Digitalisierung, KI und Energie. Stand dieser Übersicht: 19.10.2026.
+Referenzunterlagen von Frank Arendt (Diplominformatiker, Bretten): Konzepte, Studien und Aufstellungen aus den Bereichen Digitalisierung, KI und Energie. Stand dieser Übersicht: 25.10.2026.
 
 Alle Dokumente sind Entwürfe oder Orientierungshilfen, keine Rechts-, Steuer- oder Anlageberatung. Zahlen sind, soweit nicht anders vermerkt, Modellrechnungen oder Herstellerangaben.
 
@@ -8,7 +8,7 @@ Alle Dokumente sind Entwürfe oder Orientierungshilfen, keine Rechts-, Steuer- o
 
 | Projekt | Dokumente | Kurzbeschreibung | Stand |
 |---|---|---|---|
-| [Onsite-KI](#onsite-ki) | [onsite-ki-modelle.html](onsite-ki-modelle.html) | Praxisleitfaden für lokal betriebene KI-Modelle (Hardware, Kosten, Recht, IT-Sicherheit) | Okt. 2026 |
+| [Onsite-KI](#onsite-ki) | [onsite-ki.de](https://onsite-ki.de/) | Website: Praxisleitfaden für lokal betriebene KI (Governance und Datenschutz, Hardware, Kosten, Recht, IT-Sicherheit) | Okt. 2026 |
 | [SCORE](#score) | [Anforderungsdokument](SCORE%20Anforderungsdokument.pdf), [Konzept-Deck](SCORE_%E2%80%94_Smart_Cost-Optimized_Recognition_%26_Evaluation_Engine%202.pdf), [Beratungsdokumentation](SCORE_Beratungsdokumentation_Arendt.pdf) | Lernender Prozess zur Belegerkennung mit kostengesteuerter Verfahrenswahl | Juli bis Okt. 2026 |
 | [Smart Grid Eigenheim](#smart-grid-eigenheim) | [Anforderungsdokument](Digitalisierungsprojekt%20Smart%20Grid%20v1%204.html), [Kundenpräsentation](Smart_Grid_Eigenheim.pdf) | Energiemanagementsystem für ein Wohnhaus mit PV, Speicher, E-Auto und Wallbox | Juli 2026 |
 | [Power on Rails](#power-on-rails) | [Power on Rails.pdf](Power%20on%20Rails.pdf) | Machbarkeitsbetrachtung: Batterien auf Güterwagen als Brücke im Netzausbau | Okt. 2026 (Fassung 2.1) |
@@ -18,16 +18,18 @@ Alle Dokumente sind Entwürfe oder Orientierungshilfen, keine Rechts-, Steuer- o
 
 ## Onsite-KI
 
-**Datei:** `onsite-ki-modelle.html` (einzelne HTML-Seite, online unter https://onsite-ki.de/)
+**Website:** https://onsite-ki.de/ (mehrseitige statische Website, seit 25.10.2026). Die frühere Einzelseite `onsite-ki-modelle.html` in diesem Repository enthält nur noch einen Hinweis mit Weiterleitung; die letzte Inhaltsfassung (v6) steht in der Git-Historie (Commit `e44cc91`).
 
-**Worum es geht:** Aufstellung und Leitfaden für Privatpersonen und KMU, die KI-Modelle lokal statt in der Cloud betreiben wollen.
+**Worum es geht:** Aufstellung und Leitfaden für Privatpersonen und KMU, die KI-Modelle lokal statt in der Cloud betreiben wollen. Leitthema: Lokale KI ist zuerst ein Governance- und Datenschutzthema – die Hardware ist die lösbare Hälfte.
 
 **Management Summary**
+- **Governance und Privacy (Leitthema):** sieben Handlungsfelder, Privacy by Design, Rollen, Checkliste vor dem Produktivbetrieb und ein einfaches Modell-Register; Orientierung, keine Rechtsberatung
 - **Modelle nach Hardware:** Open-Weight-Modelle in vier Clustern (Raspberry Pi, kleine, mittlere, große Modelle) mit Speicherbedarf, passender Hardware, Stromkosten und Gesamtkosten inklusive gespiegelter SSD und USV; je Modell die typischen Einsatzbereiche (u. a. OCR) als Orientierung
 - **Hardware-Preise:** Neuware-Richtwerte für den deutschen Markt (Stand 19.10.2026); GPU- und Mac-Studio-Preise sind 2026 deutlich gestiegen, unbestätigte Werte sind im Dokument markiert
 - **Betrieb:** Architektur-Schichten (Runtime, Gateway, Wissensbasis, Anwendungen), Fernzugriff nur über VPN, Mobile-Clients, Markdown-Arbeitsweise (inkl. Verweis auf das „LLM Wiki"-Muster von Andrej Karpathy), Coding-Agenten auf lokalen Modellen
 - **Recht und Sicherheit:** EU AI Act, DSGVO, Urheberrecht, BSI-Grundschutz, ISO 27001 und 42001, OWASP-Hinweise, Patch-Disziplin
-- **Zusätzlich:** GPU-Server mieten (Anbietervergleich DE/EU), Selbst trainieren bzw. Feintuning (wann, Ablauf, Hardware Training gegenüber Inferenz), Schritt-für-Schritt-Einrichtung für Windows, Linux und macOS
+- **Modell × Use Case:** Orientierungsmatrix (0 bis 3 Sterne, abgeleitet aus Einsatzangaben und Modellklasse, nicht gemessen) mit Hinweisen zu Mindestklasse, Benchmarks und einem Selbsttest
+- **Zusätzlich:** GPU-Server mieten (Anbietervergleich DE/EU), Selbst trainieren bzw. Feintuning (wann, Ablauf, Hardware Training gegenüber Inferenz), Schritt-für-Schritt-Einrichtung für Windows, Linux, macOS und Handy, Glossar, Volltextsuche
 - **Grenzen:** Momentaufnahme ohne eigenes Benchmarking; Preise ändern sich schnell und sind vor einer Kaufentscheidung zu prüfen
 
 ---
