@@ -8,7 +8,7 @@ Alle Dokumente sind Entwürfe oder Orientierungshilfen, keine Rechts-, Steuer- o
 
 | Projekt | Dokumente | Kurzbeschreibung | Stand |
 |---|---|---|---|
-| [Onsite-KI](#onsite-ki) | [onsite-ki.de](https://onsite-ki.de/) | Website: Praxisleitfaden für lokal betriebene KI (Governance und Datenschutz, Hardware, Kosten, Recht, IT-Sicherheit) | Okt. 2026 |
+| [Onsite-KI](#onsite-ki) | [onsite-ki.de](https://onsite-ki.de/) | Website: Praxisleitfaden für lokal betriebene KI (Governance und Datenschutz, Hardware, Kosten, Recht, IT-Sicherheit)  komplettes redesign und update| Okt. 2026 |
 | [SCORE](#score) | [Anforderungsdokument](SCORE%20Anforderungsdokument.pdf), [Konzept-Deck](SCORE_%E2%80%94_Smart_Cost-Optimized_Recognition_%26_Evaluation_Engine%202.pdf), [Beratungsdokumentation](SCORE_Beratungsdokumentation_Arendt.pdf) | Lernender Prozess zur Belegerkennung mit kostengesteuerter Verfahrenswahl | Juli bis Okt. 2026 |
 | [Smart Grid Eigenheim](#smart-grid-eigenheim) | [Anforderungsdokument](Digitalisierungsprojekt%20Smart%20Grid%20v1%204.html), [Kundenpräsentation](Smart_Grid_Eigenheim.pdf) | Energiemanagementsystem für ein Wohnhaus mit PV, Speicher, E-Auto und Wallbox | Juli 2026 |
 | [Power on Rails](#power-on-rails) | [Power on Rails.pdf](Power%20on%20Rails.pdf) | Machbarkeitsbetrachtung: Batterien auf Güterwagen als Brücke im Netzausbau | Okt. 2026 (Fassung 2.1) |
